@@ -65,10 +65,12 @@ styles: [contact.css]
             </div>
           </div>
         </div>
+        {%- if settings.location %}
         <div class="info-row">
           <span class="icon-badge">{{ icon("pin", 20) }}</span>
           <div><div class="mini-label">{{ k.info.location }}</div><div class="info-value">{{ settings.location }}</div></div>
         </div>
+        {%- endif %}
         <div class="info-row info-row--stack">
           <div class="mini-label">{{ k.info.follow }}</div>
           <div class="social-row">

@@ -265,6 +265,7 @@ content:
       - name: location
         label: Lieu
         type: string
+        description: Ville et pays du siège (ex. Abidjan, Côte d'Ivoire), affichés sur l'accueil, la page Contact et le pied de page. Laissez vide pour ne l'afficher nulle part.
       - name: social
         label: Réseaux sociaux
         type: object

@@ -55,7 +55,11 @@ styles: [home.css]
         <div aria-hidden="true" class="border-flow"></div>
         <div class="panel">
           <div class="panel__top">
-            <div class="panel__place">{{ icon("pin", 18) }}<span class="mini-label" style="color: var(--muted)">{{ h.panel.kicker }}</span></div>
+            {# Le lieu (Réglages du site → Lieu) ne s'affiche que s'il est rempli #}
+            <div class="panel__place">
+              {%- if settings.location %}{{ icon("pin", 18) }}{% endif -%}
+              <span class="mini-label" style="color: var(--muted)">{{ h.panel.kicker }}{% if settings.location %} · {{ settings.location }}{% endif %}</span>
+            </div>
             <span class="live"><span class="live-dot"></span>{{ h.panel.live }}</span>
           </div>
           <div class="panel__body">
