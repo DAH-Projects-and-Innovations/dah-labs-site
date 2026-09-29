@@ -1,0 +1,22 @@
+---
+# Page affichée quand une adresse n'existe pas (erreur 404).
+# Elle affiche le message en anglais ET en français.
+layout: layouts/base.njk
+permalink: /404.html
+eleventyExcludeFromCollections: true
+lang: en
+pageKey: notFound
+---
+{%- set t = i18n[lang] -%}
+<section class="page-hero" style="min-height: 60vh; display: flex; align-items: center">
+  <div class="container">
+    <div class="eyebrow">404</div>
+    <h1 class="h-page">{{ t.notFound.title }}</h1>
+    <p class="lead" style="margin-top: 20px">{{ t.notFound.text }}</p>
+    <p class="lead" style="margin-top: 8px" lang="fr">{{ i18n.fr.notFound.title }} {{ i18n.fr.notFound.text }}</p>
+    <div style="display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap">
+      <a href="/en/" class="btn btn-primary">{{ t.notFound.home }}</a>
+      <a href="/fr/" class="btn btn-outline" lang="fr">{{ i18n.fr.notFound.home }}</a>
+    </div>
+  </div>
+</section>

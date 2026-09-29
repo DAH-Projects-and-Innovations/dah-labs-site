@@ -1,0 +1,98 @@
+---
+# Page BLOG — /en/blog/ et /fr/blog/
+# Les articles viennent de src/content/articles/ (modifiables dans l'admin).
+# La recherche, les catégories et « Voir plus » sont gérés par assets/js/list-filter.js
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/blog/"
+pageKey: blog
+styles: [blog.css]
+scripts: [list-filter.js]
+---
+{%- set t = i18n[lang] -%}
+{%- set b = t.blog -%}
+{%- set articles = collections.articlePages | where("lang", lang) -%}
+{%- set featured = articles | featuredFirst -%}
+{% from "partials/icons.njk" import icon %}
+
+{# ================= En-tête avec la recherche ================= #}
+<section class="page-hero page-hero--compact">
+  <div aria-hidden="true" class="blob blob-a" style="top: -240px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, var(--glow-a), transparent 68%)"></div>
+  <div aria-hidden="true" class="blob blob-b" style="top: 60px; left: -260px; width: 520px; height: 520px; background: radial-gradient(circle, var(--glow-b), transparent 68%)"></div>
+  <div class="container page-hero__inner page-hero__row">
+    <div style="max-width: 700px">
+      <div class="eyebrow enter d1">{{ b.hero.kicker }}</div>
+      <h1 class="h-page enter d2">{{ b.hero.title1 }} <span class="accent">{{ b.hero.title2 }}</span></h1>
+      <p class="lead enter d3" style="margin-top: 24px">{{ b.hero.lead }}</p>
+    </div>
+    {%- if articles.length %}
+    <div class="search enter d4">
+      <label class="sr-only" for="blog-search">{{ b.hero.searchLabel }}</label>
+      {{ icon("search", 18) }}
+      <input class="field" id="blog-search" type="search" placeholder="{{ b.hero.searchPh }}" data-search-input>
+    </div>
+    {%- endif %}
+  </div>
+</section>
+
+{# ================= Liste des articles ================= #}
+<section id="articles" class="section-tight">
+  <div class="container" data-list data-filter-key="category"
+       data-label-many="{{ b.filters.shown }}" data-label-one="{{ b.filters.shownOne }}"
+       data-page-size="6">
+
+  {%- if articles.length %}
+    <div class="filters enter d5">
+      <div class="chips" role="group" aria-label="{{ b.filters.label }}">
+        {%- for f in ["all", "tuto", "field", "africa", "community"] %}
+        {%- set count = articles.length if f == "all" else (articles | whereArticle("category", f) | length) %}
+        <button type="button" class="chip" data-filter="{{ f }}" aria-pressed="{{ 'true' if f == 'all' else 'false' }}">
+          {{ b.filters[f] }}<span class="chip-count">{{ count }}</span>
+        </button>
+        {%- endfor %}
+      </div>
+      <span class="results-count" data-count aria-live="polite">{{ b.filters.shown | fill(articles.length) }}</span>
+    </div>
+
+    {# L'article « à la une » (caché par list-filter.js dès qu'on filtre ou cherche) #}
+    {%- if featured %}
+      {%- set entry = featured %}
+      {% include "partials/featured-article.njk" %}
+    {%- endif %}
+
+    {# Tous les articles. L'exemplaire de l'article à la une est caché au départ
+       pour ne pas l'afficher deux fois ; list-filter.js le montre pendant un filtre. #}
+    <div class="grid-3" data-items>
+      {%- for entry in articles %}
+        {%- if entry == featured %}
+        <div hidden data-featured-copy>{% include "partials/article-card.njk" %}</div>
+        {%- else %}
+        {% include "partials/article-card.njk" %}
+        {%- endif %}
+      {%- endfor %}
+    </div>
+
+    <div class="card empty-state" data-empty hidden>
+      <strong>{{ b.empty.title }}</strong>
+      <p class="card-text" style="margin-top: 8px">{{ b.empty.text }}</p>
+    </div>
+
+    <div class="load-more" data-more hidden>
+      <button type="button" class="btn btn-outline">{{ b.more }} {{ icon("plus") }}</button>
+    </div>
+  {%- else %}
+    <div class="card empty-state"><strong>{{ b.noArticles }}</strong></div>
+  {%- endif %}
+  </div>
+</section>
+
+{# ================= Newsletter ================= #}
+<section class="section section-alt">
+  <div class="container">
+    {%- set nlLarge = true %}
+    {% include "partials/newsletter.njk" %}
+  </div>
+</section>

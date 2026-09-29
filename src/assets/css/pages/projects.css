@@ -1,0 +1,37 @@
+/* =====================================================================
+   pages/projects.css — styles propres à la page « Projets »
+   ===================================================================== */
+
+/* Section « Proposer un projet » : texte à gauche, formulaire à droite */
+.propose-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 72px;
+  align-items: start;
+}
+.propose-form { padding: 36px; }
+
+/* Les 3 étapes numérotées */
+.check-list { display: flex; flex-direction: column; gap: 18px; margin-top: 32px; }
+.check-item { display: flex; gap: 16px; align-items: flex-start; }
+.check-item strong { display: block; font-size: 16px; color: var(--text); }
+.check-item p { margin-top: 4px; }
+.check-num {
+  width: 34px; height: 34px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--white);
+  background: var(--gradient-btn);
+  flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+  .propose-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+}
+@media (max-width: 760px) {
+  .propose-form { padding: 24px 20px; }
+}

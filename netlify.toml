@@ -1,0 +1,9 @@
+# Configuration pour Netlify (alternative à GitHub Pages).
+# Attention : l'offre gratuite de Netlify compte environ 20 mises en ligne
+# par mois ; chaque enregistrement dans l'admin en déclenche une.
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"

@@ -1,0 +1,248 @@
+/* =====================================================================
+   layout.css — la structure des pages
+   (conteneur, sections, grilles, en-tête, pied de page)
+   Les adaptations pour tablette et mobile sont en bas du fichier.
+   ===================================================================== */
+
+/* ---------- Conteneur centré ---------- */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ---------- Sections ---------- */
+.section { padding: 120px 0; }
+.section-alt {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.section-tight { padding: 0 0 120px; }
+
+/* En-tête de page (le grand titre en haut des pages intérieures) */
+.page-hero {
+  position: relative;
+  padding: 96px 0 104px;
+  overflow: hidden;
+}
+.page-hero--compact { padding-bottom: 56px; }
+.page-hero__inner { position: relative; }
+.page-hero__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 56px;
+  align-items: center;
+}
+.page-hero__row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+/* Titre + texte d'introduction d'une section */
+.head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+.head-block { max-width: 660px; }
+.head-block .para { margin-top: 16px; }
+.head-block--center { margin: 0 auto 64px; text-align: center; }
+
+/* ---------- Grilles ---------- */
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+
+/* =====================================================================
+   En-tête (menu du haut)
+   ===================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  gap: 20px;
+}
+.brand { display: flex; align-items: center; flex-shrink: 0; }
+.brand-logo { display: block; height: 54px; width: auto; }
+
+.nav { display: flex; align-items: center; gap: 28px; }
+.navlink {
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 10px 2px;
+  transition: color .15s ease;
+}
+.navlink:hover,
+.navlink[aria-current="page"] { color: var(--text); }
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--orange));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+.navlink:hover::after,
+.navlink[aria-current="page"]::after { transform: scaleX(1); }
+
+.header-tools { display: flex; align-items: center; gap: 10px; }
+
+/* Boutons EN/FR et ☀️/🌙 (petits interrupteurs arrondis) */
+.seg {
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+.seg a,
+.seg button {
+  min-width: 40px;
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--faint);
+  transition: background .2s ease, color .2s ease;
+}
+.seg a:hover,
+.seg button:hover { color: var(--text); }
+.seg [aria-current="true"],
+.seg [aria-pressed="true"] {
+  background: var(--gradient-btn);
+  color: var(--white);
+}
+
+/* Bouton « menu » (visible seulement sur petit écran) */
+.menu-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-2);
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+.menu-toggle .icon-close { display: none; }
+.menu-open .menu-toggle .icon-open { display: none; }
+.menu-open .menu-toggle .icon-close { display: block; }
+
+/* =====================================================================
+   Pied de page
+   ===================================================================== */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  padding: 80px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.6fr) minmax(0, 0.75fr) minmax(0, 0.75fr) minmax(0, 1.3fr);
+  gap: 36px;
+  padding-bottom: 48px;
+}
+.footer-brand .brand-logo { height: 64px; }
+.footer-tagline { margin-top: 20px; max-width: 280px; font-size: 14.5px; line-height: 1.7; color: var(--muted); }
+.footer-social { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+.footer-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.footer-links a { font-size: 14px; color: var(--muted); transition: color .15s ease; }
+.footer-links a:hover { color: var(--text); }
+.footer-text { font-size: 14px; line-height: 1.6; color: var(--muted); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--faint);
+}
+.footer-bottom a { color: var(--link); }
+
+/* =====================================================================
+   Tablette (moins de 1100 px de large)
+   ===================================================================== */
+@media (max-width: 1100px) {
+  .container { padding: 0 28px; }
+  .section { padding: 96px 0; }
+
+  /* Le menu devient un panneau qui s'ouvre avec le bouton ☰ */
+  .menu-toggle { display: inline-flex; }
+  .nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 28px 28px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    display: none;
+  }
+  .menu-open .nav { display: flex; }
+  .navlink { padding: 14px 0; font-size: 16px; border-bottom: 1px solid var(--border); }
+  .navlink::after { display: none; }
+  .header-tools .header-cta { display: none; }
+
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+/* =====================================================================
+   Mobile (moins de 760 px de large)
+   ===================================================================== */
+@media (max-width: 760px) {
+  .container { padding: 0 20px; }
+  .section { padding: 72px 0; }
+  .section-tight { padding-bottom: 72px; }
+  .page-hero { padding: 56px 0 64px; }
+  .page-hero__split,
+  .page-hero__row { grid-template-columns: minmax(0, 1fr); display: grid; gap: 40px; align-items: start; }
+  .head-row { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 36px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: minmax(0, 1fr); }
+
+  .brand-logo { height: 42px; }
+  .header-tools { gap: 6px; }
+  .seg a, .seg button { min-width: 34px; padding: 0 8px; }
+  .nav { padding: 8px 20px 24px; }
+
+  .footer-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .footer-bottom { flex-direction: column; }
+}

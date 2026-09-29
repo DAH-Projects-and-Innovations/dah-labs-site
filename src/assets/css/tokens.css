@@ -1,0 +1,95 @@
+/* =====================================================================
+   tokens.css — la charte graphique DAH Labs en variables
+   ---------------------------------------------------------------------
+   Toutes les couleurs, polices et ombres du site sont définies ICI, une
+   seule fois. Les autres fichiers CSS utilisent ces variables :
+       color: var(--text);   background: var(--bg);
+   Pour changer une couleur partout sur le site, on la change ici.
+
+   Couleurs officielles (charte DAH Labs) :
+     Bleu    #1370EA   Orange  #F76622   Noir  #1C1C1C   Blanc #FFFFFF
+     Dégradé #127EFF → #0563D2
+   Polices : Open Sans (titres) · Inter (texte)
+   ===================================================================== */
+
+/* ---------- Valeurs qui ne changent pas avec le thème ---------- */
+:root {
+  --blue: #1370EA;
+  --blue-light: #127EFF;
+  --blue-dark: #0563D2;
+  --orange: #F76622;
+  --black: #1C1C1C;
+  --white: #FFFFFF;
+  --gradient: linear-gradient(135deg, #127EFF 0%, #1370EA 45%, #0563D2 100%);
+  --gradient-btn: linear-gradient(135deg, #1370EA, #0563D2);
+  --gradient-line: linear-gradient(90deg, #1370EA, #F76622, #127EFF, #1370EA);
+
+  --font-heading: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --container: 1180px;
+  --header-height: 76px;
+}
+
+/* ---------- Thème sombre (thème par défaut) ---------- */
+:root,
+[data-theme="dark"] {
+  --bg: #031225;                         /* fond de page */
+  --bg-2: #04162F;                       /* fond des sections alternées */
+  --surface: rgba(19, 112, 234, 0.08);   /* fond des cartes */
+  --surface-2: rgba(19, 112, 234, 0.14);
+  --panel: #051B38;
+  --border: rgba(255, 255, 255, 0.10);
+  --border-2: rgba(255, 255, 255, 0.20);
+  --text: #FFFFFF;                       /* titres */
+  --text-2: rgba(255, 255, 255, 0.88);
+  --muted: rgba(255, 255, 255, 0.72);    /* paragraphes */
+  --faint: rgba(255, 255, 255, 0.56);    /* petites infos (dates…) */
+  --link: #5A9BF0;
+  --tag-bg: rgba(19, 112, 234, 0.18);
+  --tag-fg: #89B8F5;
+  --accent-bg: rgba(247, 102, 34, 0.16);
+  --accent-fg: #F99464;
+  --header-bg: rgba(3, 18, 37, 0.86);
+  --field-bg: rgba(0, 0, 0, 0.28);
+  --code-bg: #010A17;
+  --code-fg: #DCEAFC;
+  --shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+  --shadow-sm: 0 18px 40px rgba(0, 0, 0, 0.4);
+  --glow-a: rgba(19, 112, 234, 0.30);
+  --glow-b: rgba(247, 102, 34, 0.16);
+  color-scheme: dark;
+}
+
+/* ---------- Thème clair (bouton ☀️) ---------- */
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --bg-2: #F3F8FE;
+  --surface: #FFFFFF;
+  --surface-2: #F3F8FE;
+  --panel: #FFFFFF;
+  --border: rgba(28, 28, 28, 0.10);
+  --border-2: rgba(28, 28, 28, 0.20);
+  --text: #1C1C1C;
+  --text-2: rgba(28, 28, 28, 0.88);
+  --muted: rgba(28, 28, 28, 0.74);
+  --faint: rgba(28, 28, 28, 0.62);
+  --link: #1370EA;
+  --tag-bg: rgba(19, 112, 234, 0.10);
+  --tag-fg: #1370EA;
+  --accent-bg: rgba(247, 102, 34, 0.12);
+  --accent-fg: #1C1C1C;
+  --header-bg: rgba(255, 255, 255, 0.88);
+  --field-bg: #FFFFFF;
+  --code-bg: #04162F;
+  --code-fg: #DCEAFC;
+  --shadow: 0 30px 60px rgba(28, 28, 28, 0.10);
+  --shadow-sm: 0 14px 30px rgba(28, 28, 28, 0.08);
+  --glow-a: rgba(19, 112, 234, 0.12);
+  --glow-b: rgba(247, 102, 34, 0.10);
+  color-scheme: light;
+}

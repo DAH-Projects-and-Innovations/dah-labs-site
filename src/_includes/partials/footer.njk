@@ -1,0 +1,74 @@
+{#
+  footer.njk — le pied de page (présent sur toutes les pages)
+  Les liens des réseaux sociaux et de l'écosystème viennent de
+  src/_data/settings.json (modifiable depuis l'admin, « Réglages du site »).
+#}
+{% from "partials/icons.njk" import icon %}
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="/{{ lang }}/" aria-label="DAH Labs — {{ t.nav.home }}">
+          <img class="brand-logo only-dark" src="/assets/images/logo/dah-labs-white.png" alt="DAH Labs" width="190" height="64" loading="lazy">
+          <img class="brand-logo only-light" src="/assets/images/logo/dah-labs-color.png" alt="DAH Labs" width="190" height="64" loading="lazy">
+        </a>
+        <p class="footer-tagline">{{ t.footer.tagline }}</p>
+        <div class="footer-social">
+          <a href="{{ settings.social.linkedin }}" class="social-btn" target="_blank" rel="noopener">{{ icon("linkedin") }}LinkedIn</a>
+          <a href="{{ settings.social.whatsapp }}" class="social-btn" target="_blank" rel="noopener">{{ icon("whatsapp") }}WhatsApp</a>
+          <a href="{{ settings.social.github }}" class="social-btn" target="_blank" rel="noopener">{{ icon("github") }}GitHub</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-title">{{ t.footer.explore }}</div>
+        <ul class="footer-links">
+          <li><a href="/{{ lang }}/about/">{{ t.nav.about }}</a></li>
+          <li><a href="/{{ lang }}/projects/">{{ t.nav.projects }}</a></li>
+          <li><a href="/{{ lang }}/community/">{{ t.nav.community }}</a></li>
+          <li><a href="/{{ lang }}/blog/">{{ t.nav.blog }}</a></li>
+          <li><a href="/{{ lang }}/contact/">{{ t.nav.contact }}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-title">{{ t.footer.involved }}</div>
+        <ul class="footer-links">
+          <li><a href="/{{ lang }}/projects/#propose">{{ t.footer.propose }}</a></li>
+          <li><a href="/{{ lang }}/contact/">{{ t.footer.write }}</a></li>
+          <li><a href="/{{ lang }}/community/#join">{{ t.footer.joinLink }}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-title">{{ t.footer.eco }}</div>
+        <ul class="footer-links">
+          <li><a href="{{ settings.ecosystem.dataAfriqueHub }}" target="_blank" rel="noopener">Data Afrique Hub ↗</a></li>
+          <li><a href="{{ settings.ecosystem.academy }}" target="_blank" rel="noopener">DAH Academy</a></li>
+          <li><a href="{{ settings.ecosystem.media }}" target="_blank" rel="noopener">DAH Média</a></li>
+          <li><a href="{{ settings.ecosystem.dataTour }}" target="_blank" rel="noopener">Data Tour ↗</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-title">{{ t.footer.nlTitle }}</div>
+        <p class="footer-text">{{ t.footer.nlText }}</p>
+        <form class="footer-newsletter" data-form="newsletter" action="{{ settings.forms.newsletter }}" method="POST">
+          <label class="sr-only" for="footer-email">{{ t.footer.nlLabel }}</label>
+          <input class="field" id="footer-email" name="email" type="email" required autocomplete="email" placeholder="{{ t.footer.nlPlaceholder }}">
+          <input type="hidden" name="_form" value="newsletter">
+          <input type="hidden" name="language" value="{{ lang }}">
+          <button type="submit" class="btn btn-primary" style="align-self: flex-start">{{ t.footer.nlCta }}</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {{ "now" | year }} DAH Labs — {{ t.footer.entity }} <a href="{{ settings.ecosystem.dataAfriqueHub }}" target="_blank" rel="noopener">Data Afrique Hub</a>. {{ t.footer.rights }}</span>
+      <span>{{ settings.location }}</span>
+    </div>
+  </div>
+</footer>

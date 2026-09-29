@@ -1,0 +1,20 @@
+{
+  "name": "dah-labs-site",
+  "version": "1.0.0",
+  "description": "Site web de DAH Labs, le centre d'innovation et d'incubation de Data Afrique Hub.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "katex": "^0.16.22"
+  }
+}

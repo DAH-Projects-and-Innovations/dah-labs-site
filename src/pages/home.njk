@@ -1,0 +1,222 @@
+---
+# ---------------------------------------------------------------------
+# Page d'ACCUEIL — générée deux fois : /en/ et /fr/
+# « pagination » parcourt la liste des langues : une page par langue.
+# ---------------------------------------------------------------------
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/"
+pageKey: home
+styles: [home.css]
+---
+{%- set t = i18n[lang] -%}
+{%- set h = t.home -%}
+{%- set articles = collections.articlePages | where("lang", lang) -%}
+{%- set featured = articles | featuredFirst -%}
+{%- set latest = articles | without(featured) | limit(3) -%}
+{% from "partials/icons.njk" import icon, brandIcon, net %}
+
+{# ================= 1. Bandeau principal ================= #}
+<section class="hero">
+  <div aria-hidden="true" class="blob blob-a" style="top: -220px; right: -180px; width: 680px; height: 680px; background: radial-gradient(circle, var(--glow-a), transparent 68%)"></div>
+  <div aria-hidden="true" class="blob blob-b" style="bottom: -220px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, var(--glow-b), transparent 68%)"></div>
+  {{ net("top: 60px; left: 50%; margin-left: -60px; width: 640px; height: 430px; opacity: 0.6", "var(--border-2)", "#1370EA", "#F76622") }}
+
+  <div class="container hero__grid">
+    <div>
+      <div class="eyebrow enter d1">{{ h.hero.eyebrow }}</div>
+      <h1 class="hero__title enter d2">
+        <span class="sr-only">{{ h.hero.title1 }} {{ h.hero.title2a }} {{ h.hero.w1 }}</span>
+        <span aria-hidden="true">{{ h.hero.title1 }} {{ h.hero.title2a }}<br>
+          <span class="rotator"><span class="rotator-track">
+            <span class="accent">{{ h.hero.w1 }}</span><span class="accent">{{ h.hero.w2 }}</span><span class="accent">{{ h.hero.w3 }}</span><span class="accent">{{ h.hero.w4 }}</span><span class="accent">{{ h.hero.w1 }}</span>
+          </span></span>
+        </span>
+      </h1>
+      <p class="lead hero__text enter d3">{{ h.hero.paragraph }}</p>
+      <div class="hero__buttons enter d4">
+        <a href="/{{ lang }}/community/" class="btn btn-primary">{{ h.hero.ctaPrimary }} {{ icon("arrow") }}</a>
+        <a href="/{{ lang }}/projects/" class="btn btn-outline">{{ h.hero.ctaSecondary }}</a>
+      </div>
+      <div class="hero__pills enter d5">
+        <span class="pill"><span class="dot" style="background: #127EFF"></span>{{ h.hero.tag1 }}</span>
+        <span class="pill"><span class="dot" style="background: #F76622"></span>{{ h.hero.tag2 }}</span>
+        <span class="pill"><span class="dot" style="background: #1370EA"></span>{{ h.hero.tag3 }}</span>
+      </div>
+    </div>
+
+    {# Panneau « activité du lab » : les chiffres et la liste se mettent à jour
+       automatiquement à chaque projet ou article publié. #}
+    <div class="enter d4">
+      <div class="panel-frame float">
+        <div aria-hidden="true" class="border-flow"></div>
+        <div class="panel">
+          <div class="panel__top">
+            <div class="panel__place">{{ icon("pin", 18) }}<span class="mini-label" style="color: var(--muted)">{{ h.panel.kicker }}</span></div>
+            <span class="live"><span class="live-dot"></span>{{ h.panel.live }}</span>
+          </div>
+          <div class="panel__body">
+            <div class="panel__title">{{ h.panel.title }}</div>
+            <div class="stats-mini">
+              <div class="stat"><b>{{ collections.projects.length }}</b><span>{{ h.panel.stat1 }}</span></div>
+              <div class="stat"><b>{{ collections.members.length or "—" }}</b><span>{{ h.panel.stat2 }}</span></div>
+              <div class="stat"><b>{{ articles.length }}</b><span>{{ h.panel.stat3 }}</span></div>
+            </div>
+            <div class="mini-label">{{ h.panel.activityLabel }}</div>
+            <ul class="activity">
+              {%- for item in collections.projects | recentActivity(collections.articlePages, lang) %}
+              <li class="row-in">
+                <a href="{{ item.url }}">
+                  <span class="act-icon"><img class="icon-img" src="/assets/images/icons/{{ item.icon }}.png" alt="" width="20" height="20"></span>
+                  <span class="act-text"><strong>{{ h.panel.newArticle if item.kind == "article" else h.panel.newProject }}</strong> · {{ item.title }}</span>
+                  <time class="act-time" datetime="{{ item.date | isoDate }}">{{ item.date | readableDate(lang, "short") }}</time>
+                </a>
+              </li>
+              {%- endfor %}
+            </ul>
+            <div class="mini-label" style="margin-bottom: 12px">{{ h.panel.domainsLabel }}</div>
+            <div class="tags">
+              {%- for d in [["innovation","innovation"],["recherche","research"],["collaboration","collab"],["donnees","data"],["impact","impact"],["communaute","community"]] %}
+              <span class="tag"><span class="domain-dot"><img class="icon-img" src="/assets/images/icons/{{ d[0] }}.png" alt="" width="15" height="15"></span>{{ h.domains[d[1]] }}</span>
+              {%- endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ================= 2. Bandeau de mots qui défile ================= #}
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee">
+    {%- for round in [1, 2] %}{% for word in h.marquee %}<span class="mq-item">{{ word }}</span><span class="mq-dot"></span>{% endfor %}{% endfor %}
+  </div>
+</div>
+
+{# ================= 3. À propos (aperçu) ================= #}
+<section class="section">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ h.about.kicker }}</div>
+        <h2 class="h-section">{{ h.about.title }}</h2>
+        <p class="para">{{ h.about.paragraph }}</p>
+      </div>
+      <a href="/{{ lang }}/about/" class="btn btn-outline">{{ h.about.more }} {{ icon("arrow") }}</a>
+    </div>
+    <div class="grid-3">
+      {%- for pillar in [["1","innovation"],["2","recherche"],["3","collaboration"]] %}
+      <div class="card card-hover spot" data-reveal style="padding: 34px 30px; overflow: hidden">
+        <div aria-hidden="true" class="card-number">0{{ pillar[0] }}</div>
+        {{ brandIcon(pillar[1]) }}
+        <h3 style="font-size: 21px; margin-top: 24px">{{ h.about["p" + pillar[0] + "t"] }}</h3>
+        <p class="card-text" style="margin-top: 12px; font-size: 15px">{{ h.about["p" + pillar[0] + "d"] }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# ================= 4. Projets (aperçu) ================= #}
+<section class="section section-alt">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ h.projects.kicker }}</div>
+        <h2 class="h-section">{{ h.projects.title }}</h2>
+        <p class="para">{{ h.projects.paragraph }}</p>
+      </div>
+      <a href="/{{ lang }}/projects/" class="btn btn-outline">{{ h.projects.more }} {{ icon("arrow") }}</a>
+    </div>
+    <div class="grid-3">
+      {%- for project in collections.projects | limit(2) %}
+        {% include "partials/project-card.njk" %}
+      {%- endfor %}
+      <a href="/{{ lang }}/projects/#propose" class="card card-hover spot card-dashed card-pad" data-reveal style="justify-content: center; padding: 32px 28px">
+        <span class="icon-badge icon-badge--lg">{{ icon("plus", 24) }}</span>
+        <h3 class="card-title" style="font-size: 20px">{{ h.projects.proposeTitle }}</h3>
+        <p class="card-text">{{ h.projects.proposeText }}</p>
+        <span class="link-arrow">{{ h.projects.proposeCta }} {{ icon("arrow") }}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{# ================= 5. Communauté (aperçu) ================= #}
+<section class="section">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ h.community.kicker }}</div>
+        <h2 class="h-section">{{ h.community.title }}</h2>
+        <p class="para">{{ h.community.paragraph }}</p>
+      </div>
+    </div>
+    <div class="grid-4">
+      {%- for role in [["1","donnees"],["2","recherche"],["3","innovation"],["4","impact"]] %}
+      <div class="card card-hover spot card-pad" data-reveal>
+        {{ brandIcon(role[1]) }}
+        <h3 style="font-size: 17px; line-height: 1.35">{{ h.community["r" + role[0] + "t"] }}</h3>
+        <p class="card-text" style="font-size: 14px">{{ h.community["r" + role[0] + "d"] }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+
+    <div class="card team-strip" data-reveal>
+      <div class="team-strip__left">
+        <div class="team-strip__avatars">
+          {%- for member in collections.members | limit(6) %}
+          <span class="avatar">{% if member.data.photo %}<img src="{{ member.data.photo }}" alt="" width="52" height="52" loading="lazy">{% else %}{{ icon("user", 24) }}{% endif %}</span>
+          {%- endfor %}
+        </div>
+        <div>
+          <div class="team-strip__title">{{ h.community.teamTitle }}</div>
+          <div class="team-strip__text">
+            {%- if collections.members.length %}{{ h.community.teamText | fill(collections.members.length) }}{% else %}{{ t.community.team.paragraph }}{% endif -%}
+          </div>
+        </div>
+      </div>
+      <a href="/{{ lang }}/community/#team" class="btn btn-outline">{{ h.community.more }} {{ icon("arrow") }}</a>
+    </div>
+  </div>
+</section>
+
+{# ================= 6. Blog (aperçu) ================= #}
+<section class="section section-alt">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ h.blog.kicker }}</div>
+        <h2 class="h-section">{{ h.blog.title }}</h2>
+        <p class="para">{{ h.blog.paragraph }}</p>
+      </div>
+      <a href="/{{ lang }}/blog/" class="btn btn-outline">{{ h.blog.more }} {{ icon("arrow") }}</a>
+    </div>
+
+    {%- if featured %}
+      {%- set entry = featured %}
+      {% include "partials/featured-article.njk" %}
+    {%- endif %}
+
+    <div class="grid-3">
+      {%- for entry in latest %}
+        {% include "partials/article-card.njk" %}
+      {%- endfor %}
+    </div>
+
+    <div style="margin-top: 40px">
+      {% include "partials/newsletter.njk" %}
+    </div>
+  </div>
+</section>
+
+{# ================= 7. Envie de contribuer ? ================= #}
+<section id="contribute" class="section">
+  <div class="container">
+    {% include "partials/contribute.njk" %}
+  </div>
+</section>

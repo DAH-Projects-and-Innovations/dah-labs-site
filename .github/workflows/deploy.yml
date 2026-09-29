@@ -1,0 +1,64 @@
+# =====================================================================
+# Mise en ligne automatique sur GitHub Pages
+# ---------------------------------------------------------------------
+# À chaque modification enregistrée sur la branche « main » (depuis
+# l'admin Pages CMS ou par un développeur), GitHub :
+#   1. récupère le code ;
+#   2. installe les outils (npm ci) ;
+#   3. construit le site (Eleventy → dossier _site) ;
+#   4. publie _site sur GitHub Pages.
+# Durée : environ 1 à 2 minutes. Gratuit pour un dépôt public.
+# À activer une fois : Settings → Pages → Source : « GitHub Actions ».
+# =====================================================================
+name: Mise en ligne du site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # bouton « Run workflow » pour relancer à la main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Préparer GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Installer les outils
+        run: npm ci
+
+      # base_path vaut "" avec un nom de domaine (labs.exemple.org)
+      # ou "/nom-du-depot" sans nom de domaine.
+      - name: Construire le site
+        run: npx @11ty/eleventy --pathprefix="${{ steps.pages.outputs.base_path }}/"
+
+      - name: Envoyer le site construit
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Publier
+        id: deployment
+        uses: actions/deploy-pages@v5

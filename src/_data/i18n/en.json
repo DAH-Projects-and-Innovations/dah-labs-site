@@ -1,0 +1,425 @@
+{
+  "lang": "en",
+  "meta": {
+    "description": "DAH Labs is the innovation and incubation center of Data Afrique Hub. We support entrepreneurs and startups building high-impact technology solutions for tomorrow's Africa.",
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "close": "Close menu",
+    "titles": {
+      "home": "DAH Labs — Innovation & incubation by Data Afrique Hub",
+      "about": "About",
+      "projects": "Projects",
+      "community": "Community",
+      "blog": "Blog",
+      "contact": "Contact",
+      "notFound": "Page not found"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "label": "Main navigation",
+    "about": "About",
+    "projects": "Projects",
+    "community": "Community",
+    "blog": "Blog",
+    "contact": "Contact",
+    "cta": "Join us",
+    "langLabel": "Language",
+    "themeLabel": "Theme",
+    "light": "Light mode",
+    "dark": "Dark mode"
+  },
+  "footer": {
+    "tagline": "The innovation and incubation center of Data Afrique Hub.",
+    "explore": "Explore",
+    "involved": "Get involved",
+    "propose": "Propose a project",
+    "write": "Write for the blog",
+    "joinLink": "Join the community",
+    "nlTitle": "Newsletter",
+    "nlText": "News from the lab: new projects, articles and events.",
+    "nlLabel": "Your email",
+    "nlPlaceholder": "you@example.com",
+    "nlCta": "Subscribe",
+    "rights": "All rights reserved.",
+    "eco": "DAH ecosystem",
+    "entity": "an entity of"
+  },
+  "common": {
+    "draft": "Draft",
+    "github": "GitHub",
+    "live": "Live site",
+    "readArticle": "Read the article",
+    "author": "DAH Labs Team",
+    "minRead": "min read",
+    "loadMore": "Load more",
+    "toBeAdded": "[to be added]"
+  },
+  "status": {
+    "progress": "In progress",
+    "live": "Deployed",
+    "open": "Open to contributors"
+  },
+  "forms": {
+    "sending": "Sending…",
+    "success": "Thank you! Your message has been sent.",
+    "nlSuccess": "Thank you! You're subscribed.",
+    "error": "Something went wrong. Please try again, or email us directly.",
+    "notConfigured": "This form is not connected yet. In the meantime, please reach us through our social networks."
+  },
+  "join": {
+    "kicker": "Get involved",
+    "title": "Want to contribute?",
+    "paragraph": "Curious beginner or seasoned practitioner, there's a place for you in the lab. Join our channels, pick an issue on GitHub and build with us.",
+    "linkedin": "Join on LinkedIn",
+    "whatsapp": "Join on WhatsApp",
+    "github": "Contribute on GitHub",
+    "note": "Open to analysts, researchers, developers and data & AI enthusiasts."
+  },
+  "newsletter": {
+    "title": "Get the next articles",
+    "text": "One email per new post, nothing more.",
+    "label": "Your email",
+    "placeholder": "you@example.com",
+    "cta": "Subscribe"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "DAH Labs · Innovation & incubation",
+      "title1": "The network turning",
+      "title2a": "data into",
+      "w1": "impact.",
+      "w2": "solutions.",
+      "w3": "opportunities.",
+      "w4": "knowledge.",
+      "paragraph": "The innovation and incubation center of Data Afrique Hub. We support entrepreneurs, startups and builders in creating high-impact technology solutions for tomorrow's Africa — from the first idea to deployment.",
+      "ctaPrimary": "Join the community",
+      "ctaSecondary": "Explore our projects",
+      "tag1": "Project incubation",
+      "tag2": "Startup support",
+      "tag3": "Pan-African network"
+    },
+    "panel": {
+      "kicker": "Lab · Abidjan",
+      "title": "Activity snapshot",
+      "live": "Up to date",
+      "stat1": "Projects",
+      "stat2": "Members",
+      "stat3": "Articles",
+      "activityLabel": "Latest updates",
+      "newProject": "Project",
+      "newArticle": "Article",
+      "domainsLabel": "Areas covered"
+    },
+    "domains": {
+      "innovation": "Innovation",
+      "research": "Research",
+      "collab": "Collaboration",
+      "data": "Data",
+      "impact": "Impact",
+      "community": "Community"
+    },
+    "marquee": [
+      "Data Science",
+      "Machine Learning",
+      "LLM & RAG",
+      "Open Data",
+      "Data Visualisation",
+      "Python",
+      "MLOps",
+      "Research"
+    ],
+    "about": {
+      "kicker": "About us",
+      "title": "Turning data into a lever for Africa's development",
+      "paragraph": "We turn the community's energy into concrete, documented, reproducible projects built to meet real needs — health, agriculture, education, finance.",
+      "more": "Learn more about us",
+      "p1t": "Incubate",
+      "p1d": "We guide data & AI projects from idea to working prototype, with method and rigor.",
+      "p2t": "Support",
+      "p2d": "Mentoring, method and technical support at every stage, from prototype to launch.",
+      "p3t": "Connect",
+      "p3d": "A pan-African network of practitioners, institutions and technical partners who help each other."
+    },
+    "projects": {
+      "kicker": "Our projects",
+      "title": "Projects that answer real needs",
+      "paragraph": "Open-source projects led by the community. Click a project to open its code on GitHub or the live version.",
+      "more": "See all projects",
+      "live": "Live site",
+      "proposeTitle": "Your project here",
+      "proposeText": "Have a data or AI idea with real impact? Propose it and let the community help build it.",
+      "proposeCta": "Propose a project"
+    },
+    "community": {
+      "kicker": "Our community",
+      "title": "A pan-African community of practitioners",
+      "paragraph": "DAH Labs brings together complementary profiles, united by one ambition: moving the continent's data & AI ecosystem forward.",
+      "r1t": "Analysts & Data Scientists",
+      "r1d": "Exploring, modeling and visualizing data.",
+      "r2t": "Researchers",
+      "r2d": "Monitoring, experimenting and publishing on applied AI.",
+      "r3t": "AI Developers",
+      "r3d": "Building tools, pipelines and data products.",
+      "r4t": "Mentors & Partners",
+      "r4d": "Supporting, training and connecting project owners.",
+      "teamTitle": "Meet the people behind the lab",
+      "teamText": "{n} members drive the department's projects day to day.",
+      "more": "Meet the team"
+    },
+    "blog": {
+      "kicker": "Blog",
+      "title": "Ideas, tutorials and field notes",
+      "paragraph": "What the community learns, builds and shares — written by and for data & AI practitioners.",
+      "more": "See all articles",
+      "featured": "Featured"
+    }
+  },
+  "about": {
+    "hero": {
+      "kicker": "About DAH Labs",
+      "title1": "We help turn bold ideas into",
+      "title2": "high-impact solutions.",
+      "lead": "DAH Labs is the innovation and incubation center of Data Afrique Hub. We support entrepreneurs and startups building technology solutions with real impact for tomorrow's Africa.",
+      "cta1": "See our projects",
+      "cta2": "Meet the team",
+      "cardText": "Innovation and incubation center — part of the Data Afrique Hub ecosystem."
+    },
+    "mv": {
+      "missionLabel": "Our mission",
+      "mission": "Support entrepreneurs and startups in creating technology solutions with a strong impact for tomorrow's Africa.",
+      "visionLabel": "Our vision",
+      "vision": "A continent where local data and local talent power the solutions to local challenges."
+    },
+    "what": {
+      "kicker": "What we do",
+      "title": "Three ways we move projects forward",
+      "paragraph": "From the first idea to a deployed tool, the lab supports every stage.",
+      "p1t": "Incubate",
+      "p1d": "We guide data & AI projects from idea to working prototype, with method and rigor.",
+      "p2t": "Support",
+      "p2d": "Mentoring, method and technical support at every stage, from prototype to launch.",
+      "p3t": "Connect",
+      "p3d": "A pan-African network of practitioners, institutions and technical partners who help each other."
+    },
+    "process": {
+      "kicker": "How it works",
+      "title": "From idea to deployed project",
+      "paragraph": "A simple path that any member can follow.",
+      "s1t": "Propose",
+      "s1d": "A member submits an idea with a clear problem and the impact expected.",
+      "s2t": "Select",
+      "s2d": "The lab reviews ideas for impact, feasibility and the skills available.",
+      "s3t": "Build",
+      "s3d": "A small team forms around the project, with mentoring and regular milestones.",
+      "s4t": "Deploy",
+      "s4d": "The project is documented, published on GitHub and put in users' hands.",
+      "cta": "Propose a project"
+    },
+    "values": {
+      "kicker": "Our values",
+      "title": "What guides the way we work",
+      "v1t": "Open by default",
+      "v1d": "Code, data and lessons learned are shared so others can build on them.",
+      "v2t": "Rigor",
+      "v2d": "Sound methods, documented choices and results we can explain.",
+      "v3t": "Impact first",
+      "v3d": "We pick problems that matter to people, not just interesting ones.",
+      "v4t": "Together",
+      "v4d": "Beginners and experts learn from each other on every project."
+    },
+    "stats": {
+      "s1": "Community members",
+      "s2": "Projects incubated",
+      "s3": "Countries represented",
+      "s4": "Workshops held"
+    },
+    "eco": {
+      "kicker": "Our ecosystem",
+      "title": "One of the four entities of Data Afrique Hub",
+      "paragraph": "Data Afrique Hub connects talent, knowledge and opportunities around data and technology. DAH Labs works alongside three sister entities.",
+      "cta": "Visit Data Afrique Hub",
+      "visit": "Visit",
+      "here": "You are here",
+      "tourName": "Data Tour",
+      "tourText": "An annual challenge that brings together the best tech talent to design concrete, innovative solutions to Africa's major challenges.",
+      "academyName": "DAH Academy",
+      "academyText": "The academic arm training tomorrow's African experts through degree and certificate programs and strategic international partnerships.",
+      "mediaName": "DAH Média",
+      "mediaText": "The first African media outlet dedicated to AI, Data Science and Cybersecurity, giving visibility to the talent and initiatives shaping the continent's digital future.",
+      "labsName": "DAH Labs",
+      "labsText": "The innovation and incubation center supporting entrepreneurs and startups in creating high-impact technology solutions for tomorrow's Africa."
+    }
+  },
+  "projects": {
+    "hero": {
+      "kicker": "Projects",
+      "title1": "Open projects,",
+      "title2": "real impact.",
+      "lead": "Every project is open source and built by the community. Open one to read its code on GitHub or try the live version.",
+      "cta": "Propose a project"
+    },
+    "filters": {
+      "label": "Filter projects",
+      "all": "All",
+      "progress": "In progress",
+      "live": "Deployed",
+      "open": "Open to contributors",
+      "shown": "{n} projects shown",
+      "shownOne": "{n} project shown"
+    },
+    "propose": {
+      "kicker": "Propose a project",
+      "title": "Have an idea? Let's build it together.",
+      "paragraph": "Tell us about the problem you want to solve. Beginners are welcome: the lab helps shape the idea and find the right team.",
+      "s1t": "Describe the problem",
+      "s1d": "Who is affected, what data exists, and what a good result would look like.",
+      "s2t": "We review it together",
+      "s2d": "The lab looks at impact, feasibility and the skills available in the community.",
+      "s3t": "A team forms",
+      "s3d": "Contributors join, a GitHub repository is opened and the first milestones are set.",
+      "fName": "Your name",
+      "fEmail": "Email address",
+      "fProject": "Project name",
+      "fDomain": "Domain",
+      "o1": "Health",
+      "o2": "Agriculture",
+      "o3": "Education",
+      "o4": "Finance",
+      "o5": "Other",
+      "fDesc": "Describe the project",
+      "fDescPh": "The problem, the people it helps, the data you have in mind…",
+      "fRepo": "Repository link (optional)",
+      "submit": "Submit the project"
+    },
+    "empty": "No project in this category yet."
+  },
+  "community": {
+    "hero": {
+      "kicker": "Community",
+      "title1": "The people behind",
+      "title2": "DAH Labs.",
+      "lead": "Analysts, researchers, developers and mentors from across the continent, building data & AI projects side by side.",
+      "cta1": "Meet the team",
+      "cta2": "Join the community"
+    },
+    "roles": {
+      "kicker": "Who we are",
+      "title": "Complementary profiles, one ambition",
+      "paragraph": "Every project brings several of these profiles together.",
+      "r1t": "Analysts & Data Scientists",
+      "r1d": "Exploring, modeling and visualizing data.",
+      "r2t": "Researchers",
+      "r2d": "Monitoring, experimenting and publishing on applied AI.",
+      "r3t": "AI Developers",
+      "r3d": "Building tools, pipelines and data products.",
+      "r4t": "Mentors & Partners",
+      "r4d": "Supporting, training and connecting project owners."
+    },
+    "team": {
+      "kicker": "The department",
+      "title": "Meet the team",
+      "paragraph": "The members who run the lab's projects day to day."
+    },
+    "emptyTeam": "The team will be presented here soon."
+  },
+  "blog": {
+    "hero": {
+      "kicker": "Blog",
+      "title1": "Ideas, tutorials",
+      "title2": "and field notes.",
+      "lead": "What the community learns, builds and shares — written by and for data & AI practitioners.",
+      "searchLabel": "Search articles",
+      "searchPh": "Search an article…"
+    },
+    "filters": {
+      "label": "Filter articles",
+      "all": "All",
+      "tuto": "Tutorials",
+      "field": "Field notes",
+      "africa": "Data & Africa",
+      "community": "Community life",
+      "shown": "{n} articles",
+      "shownOne": "{n} article"
+    },
+    "cats": {
+      "tuto": "Tutorial",
+      "field": "Field notes",
+      "africa": "Data & Africa",
+      "community": "Community life"
+    },
+    "more": "Load more articles",
+    "empty": {
+      "title": "No article matches your search",
+      "text": "Try another keyword or pick a different category."
+    },
+    "noArticles": "The first articles are on their way."
+  },
+  "article": {
+    "crumbLabel": "Breadcrumb",
+    "toc": "Table of Contents",
+    "anchorLabel": "Link to this section",
+    "fallbackNotice": "This article is only available in French for now.",
+    "citeTitle": "Citation",
+    "citeIntro": "Cited as:",
+    "citeOr": "Or",
+    "share": "Share this article",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied",
+    "writtenBy": "Written by",
+    "authorBio": "Articles written by members of DAH Labs, the innovation and incubation center of Data Afrique Hub.",
+    "navLabel": "More articles",
+    "newer": "Newer",
+    "older": "Older",
+    "back": "Back to all articles",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "contact": {
+    "hero": {
+      "kicker": "Contact",
+      "title1": "Let's",
+      "title2": "talk.",
+      "lead": "A question, an idea, a partnership proposal? Write to us and the team will get back to you."
+    },
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "subject": "Subject",
+      "org": "Organization (optional)",
+      "o1": "Partnership",
+      "o2": "Propose a project",
+      "o3": "Join the community",
+      "o4": "Write for the blog",
+      "o5": "Press",
+      "o6": "Other",
+      "message": "Your message",
+      "messagePh": "Tell us a bit about your request…",
+      "consent": "I agree that DAH Labs may contact me about this request.",
+      "submit": "Send message"
+    },
+    "info": {
+      "email": "Email",
+      "location": "Based in",
+      "follow": "Follow us"
+    },
+    "ways": {
+      "title": "Other ways to get involved",
+      "w1t": "Propose a project",
+      "w1d": "Share an idea and build it with the community.",
+      "w2t": "Write for the blog",
+      "w2d": "Share a tutorial or a field note.",
+      "w3t": "Join the community",
+      "w3d": "Meet the team and our channels."
+    }
+  },
+  "notFound": {
+    "title": "This page doesn't exist.",
+    "text": "The link may be broken or the page may have moved.",
+    "home": "Back to home"
+  },
+  "langNames": {
+    "en": "English",
+    "fr": "Français"
+  }
+}

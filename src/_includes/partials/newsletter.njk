@@ -1,0 +1,29 @@
+{#
+  newsletter.njk — l'encart « Recevez les prochains articles »
+  Variante : `nlLarge` = true pour la grande version (page Blog).
+  L'envoi est géré par assets/js/forms.js ; l'adresse de destination
+  est dans settings.json → forms.newsletter.
+#}
+{% from "partials/icons.njk" import icon %}
+{%- set nlId = "nl-" + (pageKey or "page") -%}
+<div class="card newsletter{% if nlLarge %} newsletter--large{% endif %}" data-reveal>
+  <div class="newsletter__intro">
+    <span class="icon-badge{% if nlLarge %} icon-badge--lg{% endif %}">{{ icon("mail", 21) }}</span>
+    <div>
+      <h2 class="newsletter__title">{{ t.newsletter.title }}</h2>
+      <p class="card-text" style="margin-top: 6px">{{ t.newsletter.text }}</p>
+    </div>
+  </div>
+  <form class="newsletter__form" data-form="newsletter" action="{{ settings.forms.newsletter }}" method="POST">
+    <div class="newsletter__fields">
+      <div class="form-group">
+        <label class="field-label" for="{{ nlId }}">{{ t.newsletter.label }}</label>
+        <input class="field" id="{{ nlId }}" name="email" type="email" required autocomplete="email" placeholder="{{ t.newsletter.placeholder }}">
+      </div>
+      <button type="submit" class="btn btn-primary">{{ t.newsletter.cta }}</button>
+    </div>
+    <input type="hidden" name="_form" value="newsletter">
+    <input type="hidden" name="language" value="{{ lang }}">
+    <p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+</div>

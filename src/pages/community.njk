@@ -1,0 +1,94 @@
+---
+# Page COMMUNAUTÉ — /en/community/ et /fr/community/
+# Les membres viennent des fichiers de src/content/members/ (modifiables dans l'admin).
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/community/"
+pageKey: community
+styles: [community.css]
+---
+{%- set t = i18n[lang] -%}
+{%- set c = t.community -%}
+{% from "partials/icons.njk" import icon, brandIcon %}
+
+{# ================= En-tête avec l'orbite ================= #}
+<section class="page-hero">
+  <div aria-hidden="true" class="blob blob-a" style="top: -240px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, var(--glow-a), transparent 68%)"></div>
+  <div aria-hidden="true" class="blob blob-b" style="bottom: -260px; left: -220px; width: 560px; height: 560px; background: radial-gradient(circle, var(--glow-b), transparent 68%)"></div>
+  <div class="container page-hero__inner page-hero__split">
+    <div>
+      <div class="eyebrow enter d1">{{ c.hero.kicker }}</div>
+      <h1 class="h-page enter d2">{{ c.hero.title1 }} <span class="accent">{{ c.hero.title2 }}</span></h1>
+      <p class="lead enter d3" style="margin-top: 24px; max-width: 560px">{{ c.hero.lead }}</p>
+      <div class="enter d4" style="display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap">
+        <a href="#team" class="btn btn-primary">{{ c.hero.cta1 }} {{ icon("arrow") }}</a>
+        <a href="#join" class="btn btn-outline">{{ c.hero.cta2 }}</a>
+      </div>
+    </div>
+    <div class="enter d3" aria-hidden="true">
+      <div class="orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring--inner"></div>
+        <span class="orbit-center"><img class="icon-img" src="/assets/images/icons/communaute.png" alt="" width="84" height="84"></span>
+        <span class="orbit-dot orbit-dot--top bob"><img src="/assets/images/icons/donnees.png" alt="" width="30" height="30"></span>
+        <span class="orbit-dot orbit-dot--right bob"><img src="/assets/images/icons/recherche.png" alt="" width="30" height="30"></span>
+        <span class="orbit-dot orbit-dot--bottom bob"><img src="/assets/images/icons/innovation.png" alt="" width="30" height="30"></span>
+        <span class="orbit-dot orbit-dot--left bob"><img src="/assets/images/icons/impact.png" alt="" width="30" height="30"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ================= Les profils ================= #}
+<section class="section section-alt">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ c.roles.kicker }}</div>
+        <h2 class="h-section">{{ c.roles.title }}</h2>
+        <p class="para">{{ c.roles.paragraph }}</p>
+      </div>
+    </div>
+    <div class="grid-4">
+      {%- for role in [["1","donnees"],["2","recherche"],["3","innovation"],["4","impact"]] %}
+      <div class="card card-hover spot card-pad" data-reveal>
+        {{ brandIcon(role[1]) }}
+        <h3 style="font-size: 17px; line-height: 1.35">{{ c.roles["r" + role[0] + "t"] }}</h3>
+        <p class="card-text" style="font-size: 14px">{{ c.roles["r" + role[0] + "d"] }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# ================= L'équipe du département ================= #}
+<section id="team" class="section">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ c.team.kicker }}</div>
+        <h2 class="h-section">{{ c.team.title }}</h2>
+        <p class="para">{{ c.team.paragraph }}</p>
+      </div>
+    </div>
+    {%- if collections.members.length %}
+    <div class="grid-4">
+      {%- for member in collections.members %}
+        {% include "partials/member-card.njk" %}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <div class="card empty-state"><strong>{{ c.emptyTeam }}</strong></div>
+    {%- endif %}
+  </div>
+</section>
+
+{# ================= Rejoindre ================= #}
+<section id="join" class="section-tight">
+  <div class="container">
+    {% include "partials/contribute.njk" %}
+  </div>
+</section>

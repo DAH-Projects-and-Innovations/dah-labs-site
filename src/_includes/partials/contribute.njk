@@ -1,0 +1,21 @@
+{#
+  contribute.njk — le bandeau bleu « Envie de contribuer ? »
+  avec les boutons LinkedIn, WhatsApp et GitHub (liens dans settings.json)
+#}
+{% from "partials/icons.njk" import icon, net %}
+<div class="cta-band" data-reveal>
+  <div aria-hidden="true" class="blob blob-b" style="top: -140px; left: -100px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(19,112,234,0.45), transparent 70%)"></div>
+  <div aria-hidden="true" class="blob blob-a" style="bottom: -160px; right: -80px; width: 460px; height: 460px; background: radial-gradient(circle, rgba(247,102,34,0.35), transparent 70%)"></div>
+  {{ net("top: 22px; right: 26px; width: 210px; height: 140px; opacity: 0.5", "rgba(255,255,255,0.7)", "#FFFFFF", "#F76622") }}
+  <div class="cta-band__inner">
+    <div class="eyebrow">{{ t.join.kicker }}</div>
+    <h2>{{ t.join.title }}</h2>
+    <p>{{ t.join.paragraph }}</p>
+    <div class="cta-band__buttons">
+      <a href="{{ settings.social.linkedin }}" class="btn btn-white" target="_blank" rel="noopener">{{ icon("linkedin", 18) }} {{ t.join.linkedin }}</a>
+      <a href="{{ settings.social.whatsapp }}" class="btn btn-ghost-white" target="_blank" rel="noopener">{{ icon("whatsapp", 18) }} {{ t.join.whatsapp }}</a>
+      <a href="{{ settings.social.github }}" class="btn btn-ghost-white" target="_blank" rel="noopener">{{ icon("github", 18) }} {{ t.join.github }}</a>
+    </div>
+    <p class="cta-band__note">{{ t.join.note }}</p>
+  </div>
+</div>

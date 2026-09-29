@@ -1,0 +1,7 @@
+{
+  "name": "DAH Labs",
+  "languages": ["en", "fr"],
+  "defaultLang": "en",
+  "locales": { "en": "en_GB", "fr": "fr_FR" },
+  "icons": ["innovation", "recherche", "collaboration", "donnees", "impact", "communaute"]
+}

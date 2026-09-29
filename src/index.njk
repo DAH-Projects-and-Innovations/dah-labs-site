@@ -1,0 +1,25 @@
+---
+# Page racine « / » : elle redirige vers la bonne langue.
+#  - si le visiteur a déjà choisi une langue (mémorisée), on y va ;
+#  - sinon : anglais (langue par défaut demandée par le chef de projet).
+permalink: /index.html
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DAH Labs</title>
+  <script>
+    var lang = "en";
+    try { if (localStorage.getItem("dah-lang") === "fr") lang = "fr"; } catch (e) {}
+    location.replace("{{ '/' | htmlBaseUrl }}" + lang + "/");
+  </script>
+  <meta http-equiv="refresh" content="0; url=/en/">
+  <link rel="canonical" href="/en/">
+</head>
+<body>
+  <p><a href="/en/">DAH Labs — English</a> · <a href="/fr/">DAH Labs — Français</a></p>
+</body>
+</html>

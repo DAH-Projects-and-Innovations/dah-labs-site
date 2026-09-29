@@ -1,0 +1,170 @@
+---
+# Page À PROPOS — /en/about/ et /fr/about/
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/about/"
+pageKey: about
+styles: [about.css]
+---
+{%- set t = i18n[lang] -%}
+{%- set a = t.about -%}
+{% from "partials/icons.njk" import icon, brandIcon %}
+
+{# ================= En-tête de page ================= #}
+<section class="page-hero">
+  <div aria-hidden="true" class="blob blob-a" style="top: -240px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, var(--glow-a), transparent 68%)"></div>
+  <div aria-hidden="true" class="blob blob-b" style="bottom: -260px; left: -220px; width: 560px; height: 560px; background: radial-gradient(circle, var(--glow-b), transparent 68%)"></div>
+  <div class="container page-hero__inner page-hero__split">
+    <div>
+      <div class="eyebrow enter d1">{{ a.hero.kicker }}</div>
+      <h1 class="h-page enter d2">{{ a.hero.title1 }} <span class="accent">{{ a.hero.title2 }}</span></h1>
+      <p class="lead enter d3" style="margin-top: 24px; max-width: 560px">{{ a.hero.lead }}</p>
+      <div class="enter d4" style="display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap">
+        <a href="/{{ lang }}/projects/" class="btn btn-primary">{{ a.hero.cta1 }} {{ icon("arrow") }}</a>
+        <a href="/{{ lang }}/community/" class="btn btn-outline">{{ a.hero.cta2 }}</a>
+      </div>
+    </div>
+    <div class="enter d3">
+      <div class="brand-card">
+        <span class="corner corner--tl"></span><span class="corner corner--tr"></span>
+        <span class="corner corner--bl"></span><span class="corner corner--br"></span>
+        <img src="/assets/images/logo/dah-labs-white.png" alt="DAH Labs" width="300" height="101">
+        <p>{{ a.hero.cardText }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ================= Mission & vision ================= #}
+<section class="section section-alt">
+  <div class="container grid-2">
+    <div class="card card-hover spot mv-card" data-reveal>
+      {{ brandIcon("impact", 34, "icon-badge--lg") }}
+      <div class="eyebrow">{{ a.mv.missionLabel }}</div>
+      <p>{{ a.mv.mission }}</p>
+    </div>
+    <div class="card card-hover spot mv-card" data-reveal>
+      {{ brandIcon("innovation", 34, "icon-badge--lg") }}
+      <div class="eyebrow">{{ a.mv.visionLabel }}</div>
+      <p>{{ a.mv.vision }}</p>
+    </div>
+  </div>
+</section>
+
+{# ================= Ce que nous faisons ================= #}
+<section class="section">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ a.what.kicker }}</div>
+        <h2 class="h-section">{{ a.what.title }}</h2>
+        <p class="para">{{ a.what.paragraph }}</p>
+      </div>
+    </div>
+    <div class="grid-3">
+      {%- for pillar in [["1","innovation"],["2","recherche"],["3","collaboration"]] %}
+      <div class="card card-hover spot" data-reveal style="padding: 34px 30px; overflow: hidden">
+        <div aria-hidden="true" class="card-number">0{{ pillar[0] }}</div>
+        {{ brandIcon(pillar[1]) }}
+        <h3 style="font-size: 21px; margin-top: 24px">{{ a.what["p" + pillar[0] + "t"] }}</h3>
+        <p class="card-text" style="margin-top: 12px; font-size: 15px">{{ a.what["p" + pillar[0] + "d"] }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# ================= Comment ça marche (4 étapes) ================= #}
+<section class="section section-alt">
+  <div class="container">
+    <div class="head-block head-block--center" data-reveal>
+      <div class="eyebrow">{{ a.process.kicker }}</div>
+      <h2 class="h-section">{{ a.process.title }}</h2>
+      <p class="para">{{ a.process.paragraph }}</p>
+    </div>
+    <ol class="steps" style="list-style: none; margin: 0; padding: 0">
+      {%- for n in [1, 2, 3, 4] %}
+      <li class="step" data-reveal>
+        <div class="step-num" aria-hidden="true">{{ n }}</div>
+        <h3>{{ a.process["s" + n + "t"] }}</h3>
+        <p class="card-text">{{ a.process["s" + n + "d"] }}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+    <div data-reveal style="text-align: center; margin-top: 56px">
+      <a href="/{{ lang }}/projects/#propose" class="btn btn-outline">{{ a.process.cta }} {{ icon("arrow") }}</a>
+    </div>
+  </div>
+</section>
+
+{# ================= Valeurs + chiffres clés ================= #}
+<section class="section">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ a.values.kicker }}</div>
+        <h2 class="h-section">{{ a.values.title }}</h2>
+      </div>
+    </div>
+    <div class="grid-4">
+      {%- for v in [["1","donnees"],["2","recherche"],["3","impact"],["4","communaute"]] %}
+      <div class="card card-hover spot card-pad" data-reveal>
+        {{ brandIcon(v[1]) }}
+        <h3 style="font-size: 18px">{{ a.values["v" + v[0] + "t"] }}</h3>
+        <p class="card-text" style="font-size: 14px">{{ a.values["v" + v[0] + "d"] }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+
+    {# Les chiffres se modifient dans l'admin : « Réglages du site » → stats #}
+    <div class="stats" data-reveal>
+      <div><b>{{ settings.stats.members }}</b><span>{{ a.stats.s1 }}</span></div>
+      <div><b>{{ settings.stats.projects }}</b><span>{{ a.stats.s2 }}</span></div>
+      <div><b>{{ settings.stats.countries }}</b><span>{{ a.stats.s3 }}</span></div>
+      <div><b>{{ settings.stats.workshops }}</b><span>{{ a.stats.s4 }}</span></div>
+    </div>
+  </div>
+</section>
+
+{# ================= Écosystème Data Afrique Hub ================= #}
+<section class="section section-alt" id="ecosystem">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ a.eco.kicker }}</div>
+        <h2 class="h-section">{{ a.eco.title }}</h2>
+        <p class="para">{{ a.eco.paragraph }}</p>
+      </div>
+      <a href="{{ settings.ecosystem.dataAfriqueHub }}" target="_blank" rel="noopener" class="btn btn-outline">{{ a.eco.cta }} {{ icon("arrow") }}</a>
+    </div>
+    {%- set entities = [
+      { key: "tour",    icon: "trophy", url: settings.ecosystem.dataTour },
+      { key: "academy", icon: "cap",    url: settings.ecosystem.academy },
+      { key: "media",   icon: "video",  url: settings.ecosystem.media },
+      { key: "labs",    icon: "flask",  url: "", here: true }
+    ] %}
+    <div class="grid-4">
+      {%- for e in entities %}
+      <div class="card card-hover spot eco-card{% if e.here %} is-here{% endif %}" data-reveal>
+        <span class="eco-icon">{{ icon(e.icon, 26) }}</span>
+        {% if e.here %}<span class="here">{{ a.eco.here }}</span>{% endif %}
+        <div class="eco-name">{{ a.eco[e.key + "Name"] }}</div>
+        <p class="card-text" style="font-size: 14.5px">{{ a.eco[e.key + "Text"] }}</p>
+        {%- if e.url | isLink %}
+        <a class="link-arrow" href="{{ e.url }}" target="_blank" rel="noopener">{{ a.eco.visit }} {{ icon("external", 14) }}</a>
+        {%- endif %}
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{# ================= Envie de contribuer ? ================= #}
+<section class="section">
+  <div class="container">
+    {% include "partials/contribute.njk" %}
+  </div>
+</section>

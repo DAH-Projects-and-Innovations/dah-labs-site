@@ -1,0 +1,31 @@
+{#
+  featured-article.njk — la grande carte « À la une » (blog et accueil)
+  Reçoit la variable `entry` (un élément de collections.articlePages).
+#}
+{% from "partials/icons.njk" import icon %}
+{%- set a = entry.article.data -%}
+<a href="{{ entry.url }}" class="card card-hover spot featured" data-reveal data-featured
+   data-category="{{ a.category }}" data-search="{{ a | searchText }}">
+  <div class="featured__visual">
+    {%- if a.cover %}
+    <img class="cover" src="{{ a.cover }}" alt="" loading="lazy">
+    {%- else %}
+    <div aria-hidden="true" class="blob" style="top: -120px; right: -120px; width: 380px; height: 380px; background: radial-gradient(circle, rgba(19,112,234,0.45), transparent 70%)"></div>
+    <img class="featured__logo" src="/assets/images/logo/dah-labs-white.png" alt="" width="300" height="101" loading="lazy">
+    {%- endif %}
+    <span class="featured__badge">{{ icon("star", 13) }} {{ t.home.blog.featured }}</span>
+  </div>
+  <div class="featured__body">
+    <span class="eyebrow" style="letter-spacing: 0.12em">{{ t.blog.cats[a.category] }}</span>
+    <h3 class="featured__title" lang="{{ a.lang }}">{{ a.title }}</h3>
+    <p class="card-text" style="font-size: 15.5px; line-height: 1.7" lang="{{ a.lang }}">{{ a.summary }}</p>
+    <div class="featured__foot">
+      <span class="meta">
+        {{ a.author or t.common.author }} · <time datetime="{{ entry.article.date | isoDate }}">{{ entry.article.date | readableDate(lang) }}</time>
+        · {{ entry.article.templateContent | readingTime }} {{ t.common.minRead }}
+        {% if a.lang != lang %}<span class="lang-badge">{{ a.lang | upper }}</span>{% endif %}
+      </span>
+      <span class="link-arrow">{{ t.common.readArticle }} {{ icon("arrow") }}</span>
+    </div>
+  </div>
+</a>

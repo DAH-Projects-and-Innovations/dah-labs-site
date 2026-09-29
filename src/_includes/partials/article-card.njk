@@ -1,0 +1,23 @@
+{#
+  article-card.njk — une carte « article » (blog et accueil)
+  Reçoit la variable `entry` (un élément de collections.articlePages).
+#}
+{% from "partials/icons.njk" import icon, brandIcon %}
+{%- set a = entry.article.data -%}
+<a href="{{ entry.url }}" class="card card-hover spot article-card" data-reveal
+   data-category="{{ a.category }}" data-search="{{ a | searchText }}">
+  <div class="article-card__top">
+    <span class="tag{% if a.category == 'africa' %} tag-accent{% endif %}">{{ t.blog.cats[a.category] }}</span>
+    {{ brandIcon(a.icon or "recherche", 26, "icon-badge--sm") }}
+  </div>
+  <h3 class="card-title" lang="{{ a.lang }}">{{ a.title }}</h3>
+  <p class="card-text" lang="{{ a.lang }}">{{ a.summary }}</p>
+  <div class="article-card__foot">
+    <span class="meta">
+      {{ a.author or t.common.author }} · <time datetime="{{ entry.article.date | isoDate }}">{{ entry.article.date | readableDate(lang, "long") }}</time>
+      {% if a.lang != lang %}<span class="lang-badge" title="{{ t.langNames[a.lang] }}">{{ a.lang | upper }}</span>{% endif %}
+      {% if a.draft %}<span class="draft-badge">{{ t.common.draft }}</span>{% endif %}
+    </span>
+    <span class="link-arrow" aria-hidden="true">{{ icon("arrow", 18) }}</span>
+  </div>
+</a>

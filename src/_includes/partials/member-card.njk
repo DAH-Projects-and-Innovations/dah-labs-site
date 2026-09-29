@@ -1,0 +1,30 @@
+{#
+  member-card.njk — la carte d'un membre de l'équipe
+  Reçoit la variable `member` (un fichier de src/content/members/).
+#}
+{% from "partials/icons.njk" import icon %}
+{%- set m = member.data -%}
+<article class="card card-hover spot member-card" data-reveal>
+  <div class="avatar-lg">
+    {%- if m.photo %}
+    <img src="{{ m.photo }}" alt="" width="96" height="96" loading="lazy">
+    {%- else %}
+    {{ icon("user", 38) }}
+    {%- endif %}
+  </div>
+  <div style="margin-top: 8px">
+    <h3 style="font-size: 17px">{{ m.name }}{% if m.draft %} <span class="draft-badge">{{ t.common.draft }}</span>{% endif %}</h3>
+    <div class="member-role">{{ m | tr("role", lang) }}</div>
+  </div>
+  <p class="card-text">{{ m | tr("bio", lang) }}</p>
+  {%- if (m.linkedin | isLink) or (m.github | isLink) %}
+  <div class="member-links">
+    {%- if m.linkedin | isLink %}
+    <a href="{{ m.linkedin }}" class="round" target="_blank" rel="noopener" aria-label="LinkedIn — {{ m.name }}">{{ icon("linkedin", 17) }}</a>
+    {%- endif %}
+    {%- if m.github | isLink %}
+    <a href="{{ m.github }}" class="round" target="_blank" rel="noopener" aria-label="GitHub — {{ m.name }}">{{ icon("github", 17) }}</a>
+    {%- endif %}
+  </div>
+  {%- endif %}
+</article>

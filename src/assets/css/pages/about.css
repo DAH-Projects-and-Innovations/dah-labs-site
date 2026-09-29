@@ -1,0 +1,124 @@
+/* =====================================================================
+   pages/about.css — styles propres à la page « À propos »
+   ===================================================================== */
+
+/* Carte bleue avec le logo (en haut à droite) */
+.brand-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  min-height: 420px;
+  padding: 64px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  text-align: center;
+  background: var(--gradient);
+  box-shadow: var(--shadow);
+}
+.brand-card img { height: 101px; width: auto; }
+.brand-card p { max-width: 340px; font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, 0.9); }
+.corner { position: absolute; width: 14px; height: 14px; border-radius: 3px; }
+.corner--tl { top: 28px; left: 28px; background: var(--orange); }
+.corner--tr { top: 28px; right: 28px; background: rgba(255, 255, 255, 0.7); }
+.corner--bl { bottom: 28px; left: 28px; background: rgba(255, 255, 255, 0.7); }
+.corner--br { bottom: 28px; right: 28px; background: var(--orange); }
+
+/* Mission / vision */
+.mv-card { padding: 42px 40px; }
+.mv-card .eyebrow { margin-top: 26px; }
+.mv-card p { margin-top: 12px; font-size: 24px; line-height: 1.4; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+
+/* Étapes numérotées reliées par une ligne animée */
+.steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.steps::before {
+  content: "";
+  position: absolute;
+  top: 28px; left: 12.5%; right: 12.5%;
+  height: 2px;
+  background: var(--gradient-line);
+  background-size: 200% 100%;
+  animation: gradShift 5s linear infinite;
+  opacity: .7;
+}
+.step { position: relative; text-align: center; padding: 0 8px; }
+.step h3 { font-size: 19px; margin-top: 24px; }
+.step p { margin-top: 10px; }
+.step-num {
+  position: relative;
+  z-index: 1;
+  width: 56px; height: 56px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+  background: var(--gradient-btn);
+  box-shadow: 0 0 0 8px var(--bg-2);
+  transition: transform .3s ease;
+}
+.step:hover .step-num { transform: scale(1.1); }
+
+/* Chiffres clés */
+.stats {
+  margin-top: 72px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.stats > div { padding: 34px 30px; border-right: 1px solid var(--border); }
+.stats > div:last-child { border-right: none; }
+.stats b { display: block; font-size: 40px; font-weight: 800; letter-spacing: -0.02em; color: var(--orange); }
+.stats span { display: block; margin-top: 8px; font-size: 14px; color: var(--muted); }
+
+/* Écosystème Data Afrique Hub */
+.eco-card { padding: 30px 26px; display: flex; flex-direction: column; gap: 14px; }
+.eco-card.is-here { border-color: rgba(247, 102, 34, 0.55); background: linear-gradient(180deg, var(--accent-bg), var(--surface) 60%); }
+.eco-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  background: linear-gradient(135deg, #127EFF, #0563D2);
+}
+.eco-card.is-here .eco-icon { background: var(--orange); }
+.eco-name { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--link); }
+.eco-card .link-arrow { margin-top: auto; }
+.here {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent-fg);
+  border: 1px solid rgba(247, 102, 34, 0.45);
+}
+
+@media (max-width: 1100px) {
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .steps::before { display: none; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats > div:nth-child(2) { border-right: none; }
+  .stats > div:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+}
+@media (max-width: 760px) {
+  .brand-card { min-height: 300px; padding: 48px 28px; }
+  .brand-card img { height: 72px; }
+  .mv-card { padding: 30px 24px; }
+  .mv-card p { font-size: 20px; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .stats > div { padding: 24px 20px; }
+  .stats b { font-size: 32px; }
+}

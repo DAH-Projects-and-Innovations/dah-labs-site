@@ -1,0 +1,102 @@
+/* =====================================================================
+   pages/home.css — styles propres à la page d'accueil
+   ===================================================================== */
+
+/* ---------- Grand bandeau du haut ---------- */
+.hero { position: relative; padding: 100px 0 128px; overflow: hidden; }
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 72px;
+  align-items: center;
+}
+.hero__title { font-size: 56px; line-height: 1.1; margin-top: 22px; }
+.hero__text { margin-top: 26px; max-width: 540px; }
+.hero__buttons { display: flex; gap: 14px; margin-top: 38px; flex-wrap: wrap; }
+.hero__pills { display: flex; gap: 10px; margin-top: 40px; flex-wrap: wrap; }
+
+/* ---------- Panneau « activité du lab » ---------- */
+.panel-frame { position: relative; }
+.panel-frame .border-flow { position: absolute; inset: -1px; border-radius: 20px; }
+.panel {
+  position: relative;
+  margin: 1px;
+  border-radius: 19px;
+  background: var(--panel);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.panel__place { display: flex; align-items: center; gap: 10px; color: var(--link); }
+.panel__body { padding: 24px 22px 26px; }
+.panel__title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 18px; }
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(247, 102, 34, 0.12);
+  border: 1px solid rgba(247, 102, 34, 0.35);
+}
+.stats-mini { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
+.stat { padding: 16px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); }
+.stat b { display: block; font-size: 24px; font-weight: 800; color: var(--text); }
+.stat span { display: block; font-size: 12px; color: var(--faint); margin-top: 6px; }
+.activity { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 24px; padding: 0; list-style: none; }
+.activity a,
+.activity li > span {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  transition: background .2s ease;
+}
+.activity a:hover { background: var(--tag-bg); }
+.act-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #E9F1FD; flex-shrink: 0; }
+.act-text { font-size: 13.5px; color: var(--text-2); flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.act-time { font-size: 11px; color: var(--faint); white-space: nowrap; }
+.domain-dot { width: 20px; height: 20px; border-radius: 6px; background: #E9F1FD; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+/* ---------- Bloc « l'équipe » avec avatars ---------- */
+.team-strip {
+  margin-top: 32px;
+  padding: 26px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.team-strip__left { display: flex; align-items: center; gap: 22px; }
+.team-strip__avatars { display: flex; }
+.team-strip__title { font-size: 17px; font-weight: 700; color: var(--text); }
+.team-strip__text { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+/* ---------- Adaptations ---------- */
+@media (max-width: 1100px) {
+  .hero__grid { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+  .hero__title { font-size: 48px; }
+}
+@media (max-width: 760px) {
+  .hero { padding: 56px 0 80px; }
+  .hero__title { font-size: 36px; }
+  .stats-mini { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .stat { padding: 12px 10px; }
+  .stat b { font-size: 20px; }
+  .team-strip { flex-direction: column; align-items: flex-start; }
+  .team-strip__left { flex-direction: column; align-items: flex-start; }
+  .net { display: none; }
+}

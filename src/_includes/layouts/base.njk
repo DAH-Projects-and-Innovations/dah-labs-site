@@ -1,0 +1,91 @@
+{#
+  base.njk — le squelette HTML commun à TOUTES les pages
+  ---------------------------------------------------------------------
+  Chaque page (accueil, projets…) remplit seulement la partie {{ content }}.
+  L'en-tête, le pied de page, les polices, le CSS et le JavaScript
+  sont ajoutés ici une seule fois.
+
+  Variables reçues de la page :
+    lang     → "en" ou "fr"
+    pageKey  → "home", "about", "projects"… (pour le menu et le titre)
+    styles   → fichiers CSS propres à la page (dans assets/css/pages/)
+    scripts  → fichiers JS propres à la page (dans assets/js/)
+    title    → titre de l'onglet (facultatif)
+#}
+{%- set t = i18n[lang] -%}
+{%- set otherLang = "fr" if lang == "en" else "en" -%}
+{%- set pageTitle = t.meta.titles.home if pageKey == "home" else ((title or t.meta.titles[pageKey]) + " · DAH Labs") -%}
+{%- set pageDescription = description or t.meta.description -%}
+{%- set absolute = settings.siteUrl | replace(r/\/$/, "") -%}
+<!doctype html>
+<html lang="{{ lang }}" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ pageDescription }}">
+
+  {# Versions de la page dans chaque langue (utile pour Google) #}
+  {%- for l in site.languages %}
+  <link rel="alternate" hreflang="{{ l }}" href="{{ absolute }}{{ page.url | replace('/' + lang + '/', '/' + l + '/', 1) }}">
+  {%- endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ absolute }}{{ page.url | replace('/' + lang + '/', '/en/', 1) }}">
+
+  {# Aperçu quand on partage le lien (WhatsApp, LinkedIn…) #}
+  <meta property="og:type" content="{{ 'article' if pageKey == 'article' else 'website' }}">
+  <meta property="og:site_name" content="DAH Labs">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:description" content="{{ pageDescription }}">
+  <meta property="og:locale" content="{{ site.locales[lang] }}">
+  <meta property="og:image" content="{{ absolute }}{{ ogImage or '/assets/images/og-image.png' }}">
+  {%- if absolute %}
+  <meta property="og:url" content="{{ absolute }}{{ page.url }}">
+  <link rel="canonical" href="{{ absolute }}{{ page.url }}">
+  {%- endif %}
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#031225">
+
+  {# 1) Applique le thème clair/sombre AVANT l'affichage (évite un flash) #}
+  <script src="/assets/js/theme-init.js"></script>
+
+  {# 2) Polices de la charte : Open Sans (titres) et Inter (texte) #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Open+Sans:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  {# 3) Feuilles de style communes, puis celles de la page #}
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/animations.css">
+  {%- for file in styles %}
+  <link rel="stylesheet" href="/assets/css/pages/{{ file }}">
+  {%- endfor %}
+</head>
+<body class="page-{{ pageKey }}"
+      data-form-sending="{{ t.forms.sending }}" data-form-success="{{ t.forms.success }}"
+      data-form-subscribed="{{ t.forms.nlSuccess }}" data-form-error="{{ t.forms.error }}"
+      data-form-not-ready="{{ t.forms.notConfigured }}">
+  <a class="skip-link" href="#main">{{ t.meta.skip }}</a>
+  <div class="flowbar" aria-hidden="true"></div>
+
+  {% include "partials/header.njk" %}
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  {% include "partials/footer.njk" %}
+
+  {# JavaScript : commun à toutes les pages, puis propre à la page #}
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/forms.js" defer></script>
+  {%- for file in scripts %}
+  <script src="/assets/js/{{ file }}" defer></script>
+  {%- endfor %}
+</body>
+</html>

@@ -1,0 +1,41 @@
+{#
+  project-card.njk — une carte « projet »
+  Reçoit la variable `project` (un fichier de src/content/projects/).
+  Toute la carte est cliquable : elle ouvre la version en ligne du projet,
+  ou à défaut son dépôt GitHub.
+#}
+{% from "partials/icons.njk" import icon %}
+{%- set p = project.data -%}
+{%- set mainLink = p | projectLink -%}
+<article class="card card-hover spot project-card" data-reveal data-status="{{ p.status }}">
+  <div class="project-visual project-visual--{{ (loop.index0 % 3) + 1 if loop else 1 }}">
+    <span class="project-tile"><img class="icon-img" src="/assets/images/icons/{{ p.icon or 'innovation' }}.png" alt="" width="58" height="58" loading="lazy"></span>
+    <span class="status status--{{ p.status }}"><span class="dot"></span>{{ t.status[p.status] }}</span>
+  </div>
+  <div class="project-body">
+    <h3 class="card-title">
+      {%- if mainLink %}
+      <a class="stretched" href="{{ mainLink }}" target="_blank" rel="noopener">{{ p.title }}</a>
+      {%- else %}
+      {{ p.title }}
+      {%- endif %}
+      {% if p.draft %}<span class="draft-badge">{{ t.common.draft }}</span>{% endif %}
+    </h3>
+    <p class="card-text">{{ p | tr("summary", lang) }}</p>
+    {%- if p.tags and p.tags.length %}
+    <div class="tags">
+      {%- for tag in p.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+    {%- endif %}
+    {%- if (p.github | isLink) or (p.demo | isLink) %}
+    <div class="project-links above">
+      {%- if p.github | isLink %}
+      <a class="mini-link" href="{{ p.github }}" target="_blank" rel="noopener">{{ icon("github", 14) }}{{ t.common.github }}</a>
+      {%- endif %}
+      {%- if p.demo | isLink %}
+      <a class="mini-link" href="{{ p.demo }}" target="_blank" rel="noopener">{{ icon("external", 14) }}{{ t.common.live }}</a>
+      {%- endif %}
+    </div>
+    {%- endif %}
+  </div>
+</article>

@@ -1,0 +1,43 @@
+/* =====================================================================
+   pages/community.css — styles propres à la page « Communauté »
+   ===================================================================== */
+
+/* Orbite décorative : l'icône « communauté » au centre, 4 icônes autour */
+.orbit { position: relative; width: 420px; height: 420px; margin: 0 auto; }
+.orbit-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px dashed var(--border-2); animation: spinSlow 50s linear infinite; }
+.orbit-ring--inner { inset: 70px; animation-duration: 35s; animation-direction: reverse; }
+.orbit-center {
+  position: absolute;
+  top: 140px; left: 140px;
+  width: 140px; height: 140px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #FFFFFF, #E9F1FD);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  animation: bob 7s ease-in-out infinite;
+}
+.orbit-dot {
+  position: absolute;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.orbit-dot img { width: 30px; height: 30px; background: var(--white); border-radius: 8px; padding: 3px; }
+.orbit-dot--top    { top: -8px; left: 182px; background: linear-gradient(135deg, #1370EA, #0563D2); }
+.orbit-dot--right  { top: 182px; right: -8px; background: linear-gradient(135deg, #127EFF, #1370EA); animation-delay: 1.2s; }
+.orbit-dot--bottom { bottom: -8px; left: 182px; background: linear-gradient(135deg, #F76622, #127EFF); animation-delay: 2.4s; }
+.orbit-dot--left   { top: 182px; left: -8px; background: linear-gradient(135deg, #1370EA, #127EFF); animation-delay: 3.6s; }
+
+/* Délais d'apparition pour une grille de 4 colonnes */
+.grid-4 > [data-reveal]:nth-child(4n+2) { --rd: .08s; }
+.grid-4 > [data-reveal]:nth-child(4n+3) { --rd: .16s; }
+.grid-4 > [data-reveal]:nth-child(4n)   { --rd: .24s; }
+
+@media (max-width: 760px) {
+  .orbit { transform: scale(.72); margin: -60px auto; }
+}

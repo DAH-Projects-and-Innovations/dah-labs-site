@@ -1,0 +1,54 @@
+{#
+  header.njk — le menu du haut (présent sur toutes les pages)
+  Contient : logo · liens du menu · bouton EN/FR · bouton ☀️/🌙 · « Nous rejoindre »
+#}
+{% from "partials/icons.njk" import icon %}
+{%- set menu = [
+  { key: "about",     label: t.nav.about },
+  { key: "projects",  label: t.nav.projects },
+  { key: "community", label: t.nav.community },
+  { key: "blog",      label: t.nav.blog },
+  { key: "contact",   label: t.nav.contact }
+] -%}
+<header class="site-header" data-header>
+  <div class="container header-row">
+
+    <a href="/{{ lang }}/" class="brand" aria-label="DAH Labs — {{ t.nav.home }}">
+      {# Logo blanc sur fond sombre, logo couleur sur fond clair (règle de la charte) #}
+      <img class="brand-logo only-dark" src="/assets/images/logo/dah-labs-white.png" alt="DAH Labs" width="161" height="54">
+      <img class="brand-logo only-light" src="/assets/images/logo/dah-labs-color.png" alt="DAH Labs" width="161" height="54">
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="{{ t.nav.label }}">
+      {%- for item in menu %}
+      <a class="navlink" href="/{{ lang }}/{{ item.key }}/"{% if pageKey == item.key or (pageKey == "article" and item.key == "blog") %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {%- endfor %}
+    </nav>
+
+    <div class="header-tools">
+      {# Choix de la langue : un lien vers la même page dans l'autre langue #}
+      <div class="seg" role="group" aria-label="{{ t.nav.langLabel }}">
+        {%- for l in site.languages %}
+        {%- set switchUrl = ("/" + l + "/") if pageKey == "notFound" else (page.url | replace('/' + lang + '/', '/' + l + '/', 1)) %}
+        <a href="{{ switchUrl }}" hreflang="{{ l }}" lang="{{ l }}" data-set-lang="{{ l }}"{% if l == lang %} aria-current="true"{% endif %}>{{ l | upper }}</a>
+        {%- endfor %}
+      </div>
+
+      {# Choix du thème : géré par main.js #}
+      <div class="seg" role="group" aria-label="{{ t.nav.themeLabel }}">
+        <button type="button" data-set-theme="light" aria-pressed="false" aria-label="{{ t.nav.light }}">{{ icon("sun") }}</button>
+        <button type="button" data-set-theme="dark" aria-pressed="true" aria-label="{{ t.nav.dark }}">{{ icon("moon") }}</button>
+      </div>
+
+      <a href="/{{ lang }}/community/#join" class="btn btn-primary btn-sm header-cta">{{ t.nav.cta }}</a>
+
+      {# Bouton ☰ du menu, visible seulement sur tablette et mobile #}
+      <button type="button" class="menu-toggle" aria-controls="site-nav" aria-expanded="false" data-menu-toggle>
+        <span class="sr-only">{{ t.meta.menu }}</span>
+        <span class="icon-open">{{ icon("menu", 20) }}</span>
+        <span class="icon-close">{{ icon("close", 20) }}</span>
+      </button>
+    </div>
+
+  </div>
+</header>

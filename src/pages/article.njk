@@ -1,0 +1,157 @@
+---
+# Page d'un ARTICLE — une page par article et par langue :
+#   /en/blog/<nom-de-l-article>/  et  /fr/blog/<nom-de-l-article>/
+# La liste vient de la collection « articlePages » (voir eleventy.config.js).
+# Format de lecture inspiré de lilianweng.github.io : sommaire, code,
+# formules, figures, citation et références.
+layout: layouts/base.njk
+pagination:
+  data: collections.articlePages
+  size: 1
+  alias: entry
+permalink: "{{ entry.url }}"
+pageKey: article
+styles: [article.css]
+scripts: [article.js]
+---
+{%- set t = i18n[lang] -%}
+{%- set ta = t.article -%}
+{%- set a = entry.article.data -%}
+{%- set body = entry.article.templateContent -%}
+{%- set headings = body | toc -%}
+{%- set sameLang = collections.articlePages | where("lang", lang) -%}
+{%- set nav = sameLang | neighbours(entry.url) -%}
+{%- set author = a.author or t.common.author -%}
+{%- set fullUrl = (settings.siteUrl | replace(r/\/$/, "")) + entry.url -%}
+{% from "partials/icons.njk" import icon %}
+
+<article class="container">
+  <div class="post">
+
+    {# ---------- En-tête de l'article ---------- #}
+    <nav aria-label="{{ ta.crumbLabel }}" class="enter d1">
+      <ol class="crumbs">
+        <li><a href="/{{ lang }}/blog/">{{ t.nav.blog }}</a></li>
+        <li aria-hidden="true">›</li>
+        <li><a href="/{{ lang }}/blog/#articles">{{ t.blog.cats[a.category] }}</a></li>
+      </ol>
+    </nav>
+
+    <h1 class="post-title enter d2" lang="{{ a.lang }}">{{ a.title }}</h1>
+
+    <div class="post-meta enter d3">
+      <time datetime="{{ entry.article.date | isoDate }}">{{ entry.article.date | readableDate(lang) }}</time>
+      <span class="sep">·</span>
+      <span>{{ body | readingTime }} {{ t.common.minRead }}</span>
+      <span class="sep">·</span>
+      <span>{{ author }}</span>
+      {% if a.draft %}<span class="draft-badge">{{ t.common.draft }}</span>{% endif %}
+    </div>
+
+    {%- if a.tags and a.tags.length %}
+    <div class="tags post-tags enter d3">
+      {%- for tag in a.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+    {%- endif %}
+
+    {# Avis si l'article n'existe pas encore dans la langue choisie #}
+    {%- if entry.isFallback %}
+    <p class="lang-notice enter d3">{{ ta.fallbackNotice }}</p>
+    {%- endif %}
+
+    {%- if a.cover %}
+    <img class="post-cover enter d4" src="{{ a.cover }}" alt="" loading="lazy">
+    {%- endif %}
+
+    {# ---------- Sommaire (créé automatiquement à partir des titres ##) ---------- #}
+    {%- if headings.length > 1 %}
+    <details class="toc enter d4" open>
+      <summary>{{ ta.toc }} {{ icon("chevron", 18) }}</summary>
+      <ol>
+        {%- for h in headings %}
+        <li>
+          <a href="#{{ h.id }}">{{ h.text }}</a>
+          {%- if h.children.length %}
+          <ol>
+            {%- for sub in h.children %}<li><a href="#{{ sub.id }}">{{ sub.text }}</a></li>{% endfor %}
+          </ol>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+        <li><a href="#citation">{{ ta.citeTitle }}</a></li>
+      </ol>
+    </details>
+    {%- endif %}
+
+    {# ---------- Le texte de l'article (écrit en Markdown dans l'admin) ---------- #}
+    <div class="prose" lang="{{ a.lang }}" data-prose
+         data-copy="{{ ta.copy }}" data-copied="{{ ta.copied }}" data-anchor-label="{{ ta.anchorLabel }}">
+      {{ body | safe }}
+    </div>
+
+    {# ---------- Citation (comme sur lilianweng.github.io) ---------- #}
+    <section class="post-section cite" id="citation">
+      <h2>{{ ta.citeTitle }}</h2>
+      <p>{{ ta.citeIntro }}</p>
+      <p><em>{{ author }}. ({{ entry.article.date | readableDate(a.lang, "month") }}). {{ a.title }}. DAH Labs Blog. <span data-page-url>{{ fullUrl }}</span></em></p>
+      <p>{{ ta.citeOr }}</p>
+<pre><code>@article{dahlabs{{ entry.article.date | year }}{{ entry.slug | replace("-", "") }},
+  title   = "{{ a.title }}",
+  author  = "{{ author }}",
+  journal = "DAH Labs Blog",
+  year    = "{{ entry.article.date | year }}",
+  url     = "<span data-page-url>{{ fullUrl }}</span>"
+}</code></pre>
+    </section>
+
+    {# ---------- Partager (les liens sont complétés par article.js) ---------- #}
+    <div class="share">
+      <span class="mini-label">{{ ta.share }}</span>
+      <div class="share__buttons">
+        <a class="social-btn" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{ fullUrl | urlencode }}" target="_blank" rel="noopener">{{ icon("linkedin") }}LinkedIn</a>
+        <a class="social-btn" data-share="whatsapp" href="https://wa.me/?text={{ (a.title + ' ' + fullUrl) | urlencode }}" target="_blank" rel="noopener">{{ icon("whatsapp") }}WhatsApp</a>
+        <button type="button" class="social-btn" data-copy-link data-done="{{ ta.linkCopied }}">{{ icon("link") }}<span>{{ ta.copyLink }}</span></button>
+      </div>
+    </div>
+
+    {# ---------- Auteur ---------- #}
+    <div class="card author-card">
+      <span class="icon-badge icon-badge--lg"><img class="icon-img" src="/assets/images/icons/communaute.png" alt="" width="34" height="34"></span>
+      <div>
+        <span class="mini-label">{{ ta.writtenBy }}</span>
+        <strong>{{ author }}</strong>
+        <p class="card-text">{{ ta.authorBio }}</p>
+      </div>
+    </div>
+
+    {# ---------- Article plus récent / plus ancien ---------- #}
+    {%- if nav.newer or nav.older %}
+    <nav class="post-nav" aria-label="{{ ta.navLabel }}">
+      {%- if nav.newer %}
+      <a class="card card-hover" href="{{ nav.newer.url }}">
+        <span class="mini-label">← {{ ta.newer }}</span>
+        <strong lang="{{ nav.newer.article.data.lang }}">{{ nav.newer.article.data.title }}</strong>
+      </a>
+      {%- else %}<span></span>{%- endif %}
+      {%- if nav.older %}
+      <a class="card card-hover is-next" href="{{ nav.older.url }}">
+        <span class="mini-label">{{ ta.older }} →</span>
+        <strong lang="{{ nav.older.article.data.lang }}">{{ nav.older.article.data.title }}</strong>
+      </a>
+      {%- endif %}
+    </nav>
+    {%- endif %}
+
+    <div style="margin-top: 48px">
+      {% include "partials/newsletter.njk" %}
+    </div>
+
+    <p class="back-link"><a class="link-arrow" href="/{{ lang }}/blog/">{{ icon("arrow-left") }} {{ ta.back }}</a></p>
+  </div>
+</article>
+
+{# Formules mathématiques : KaTeX n'est chargé que si l'article en contient #}
+{%- if a.math %}
+<link rel="stylesheet" href="/assets/vendor/katex/katex.min.css">
+<script defer src="/assets/vendor/katex/katex.min.js"></script>
+{%- endif %}

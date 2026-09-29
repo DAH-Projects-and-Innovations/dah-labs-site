@@ -1,0 +1,12 @@
+/* =====================================================================
+   pages/blog.css — styles propres à la page « Blog »
+   ===================================================================== */
+
+/* Champ de recherche avec la loupe */
+.search { position: relative; width: 360px; flex-shrink: 0; }
+.search svg { position: absolute; left: 16px; top: 50%; margin-top: -9px; color: var(--faint); pointer-events: none; }
+.search .field { padding-left: 46px; }
+
+@media (max-width: 760px) {
+  .search { width: 100%; }
+}

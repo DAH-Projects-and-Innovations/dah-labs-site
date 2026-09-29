@@ -1,0 +1,298 @@
+# =====================================================================
+# .pages.yml — configuration de l'ADMIN du site (Pages CMS)
+# ---------------------------------------------------------------------
+# Pages CMS (https://app.pagescms.org) lit ce fichier pour construire
+# les formulaires de l'admin : « Articles », « Projets », « Membres »,
+# « Réglages du site ». Chaque formulaire enregistre un fichier dans le
+# dépôt GitHub, et l'hébergeur remet le site à jour automatiquement.
+#
+# Pour ajouter un champ à un formulaire : l'ajouter ici ET l'utiliser
+# dans le gabarit HTML correspondant (src/_includes/partials/…).
+# =====================================================================
+
+# Où sont rangées les images envoyées depuis l'admin
+media:
+  input: src/media      # dossier dans le dépôt
+  output: /media        # adresse publique sur le site
+
+# ---------- Morceaux réutilisés dans plusieurs formulaires ----------
+components:
+  icon:
+    label: Icône officielle DAH
+    type: select
+    description: L'une des 6 icônes de la charte, affichée sur la carte.
+    options:
+      values:
+        - { name: innovation, label: Innovation }
+        - { name: recherche, label: Recherche }
+        - { name: collaboration, label: Collaboration }
+        - { name: donnees, label: Données }
+        - { name: impact, label: Impact }
+        - { name: communaute, label: Communauté }
+  draft:
+    label: Brouillon (non publié)
+    type: boolean
+    description: Cochée = invisible sur le site en ligne. Décochez pour publier.
+
+content:
+  # ===================================================================
+  # ARTICLES DU BLOG
+  # ===================================================================
+  - name: articles
+    label: Articles du blog
+    type: collection
+    path: src/content/articles
+    filename: "{year}-{month}-{day}-{primary}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, lang, date, draft]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: lang
+        label: Langue de l'article
+        type: select
+        required: true
+        default: fr
+        options:
+          values:
+            - { name: fr, label: Français }
+            - { name: en, label: English }
+      - name: date
+        label: Date de publication
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: category
+        label: Catégorie
+        type: select
+        required: true
+        options:
+          values:
+            - { name: tuto, label: Tutoriel }
+            - { name: field, label: Retour d'expérience }
+            - { name: africa, label: Data & Afrique }
+            - { name: community, label: Vie de la communauté }
+      - name: summary
+        label: Résumé
+        type: text
+        required: true
+        description: Deux phrases maximum. Affiché sur la carte de l'article et dans les aperçus de partage.
+      - name: author
+        label: Auteur ou autrice
+        type: string
+        description: Laissez vide pour afficher « Équipe DAH Labs ».
+      - name: icon
+        component: icon
+        default: recherche
+      - name: tags
+        label: Mots-clés
+        type: string
+        list: true
+        description: Ex. Python, LLM, Power BI. Utilisés par la recherche du blog.
+      - name: cover
+        label: Image de couverture (facultatif)
+        type: image
+        options:
+          path: src/media/articles
+      - name: featured
+        label: À la une
+        type: boolean
+        description: L'article le plus récent coché « À la une » s'affiche en grand sur l'accueil et le blog.
+      - name: math
+        label: Contient des formules mathématiques
+        type: boolean
+        description: "À cocher si l'article contient un bloc ```math … ``` (affiché avec KaTeX)."
+      - name: translationKey
+        label: Clé de traduction (facultatif)
+        type: string
+        description: "Si cet article existe en français ET en anglais, mettez le même mot dans les deux versions (ex. rag-langchain). Sinon, laissez vide."
+      - name: draft
+        component: draft
+        default: true
+      - name: body
+        label: Texte de l'article
+        type: rich-text
+        options:
+          switcher: true
+          path: src/media/articles
+
+  # ===================================================================
+  # PROJETS
+  # ===================================================================
+  - name: projects
+    label: Projets
+    type: collection
+    path: src/content/projects
+    filename: "{primary}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, status, order, draft]
+      primary: title
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Nom du projet
+        type: string
+        required: true
+      - name: status
+        label: Statut
+        type: select
+        required: true
+        default: progress
+        options:
+          values:
+            - { name: progress, label: En cours }
+            - { name: live, label: Déployé }
+            - { name: open, label: Ouvert aux contributions }
+      - name: date
+        label: Date d'ajout
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: summary_fr
+        label: Description (français)
+        type: text
+        required: true
+        description: Une ou deux phrases sur le problème résolu et l'impact.
+      - name: summary_en
+        label: Description (English)
+        type: text
+        description: Si vide, la version française est affichée.
+      - name: tags
+        label: Mots-clés
+        type: string
+        list: true
+        description: Ex. Python, RAG, Power BI.
+      - name: icon
+        component: icon
+        default: innovation
+      - name: github
+        label: Lien du dépôt GitHub
+        type: string
+        description: Ex. https://github.com/… (laisser vide si pas encore de dépôt)
+      - name: demo
+        label: Lien de la version en ligne
+        type: string
+        description: Si rempli, un clic sur la carte ouvre ce lien ; sinon, le dépôt GitHub.
+      - name: order
+        label: Ordre d'affichage
+        type: number
+        description: 1 = affiché en premier. Les 2 premiers apparaissent sur l'accueil.
+      - name: draft
+        component: draft
+        default: false
+
+  # ===================================================================
+  # MEMBRES DE L'ÉQUIPE
+  # ===================================================================
+  - name: members
+    label: Membres de l'équipe
+    type: collection
+    path: src/content/members
+    filename: "{primary}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [name, role_fr, order, draft]
+      primary: name
+      sort: [order, name]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: name
+        label: Nom complet
+        type: string
+        required: true
+      - name: role_fr
+        label: Rôle (français)
+        type: string
+        required: true
+      - name: role_en
+        label: Role (English)
+        type: string
+      - name: bio_fr
+        label: Présentation courte (français)
+        type: text
+        description: Une phrase sur son domaine et ses projets.
+      - name: bio_en
+        label: Short bio (English)
+        type: text
+      - name: photo
+        label: Photo (carrée de préférence)
+        type: image
+        options:
+          path: src/media/members
+      - name: linkedin
+        label: Lien LinkedIn
+        type: string
+      - name: github
+        label: Lien GitHub
+        type: string
+      - name: order
+        label: Ordre d'affichage
+        type: number
+      - name: draft
+        component: draft
+        default: false
+
+  # ===================================================================
+  # RÉGLAGES DU SITE (un seul fichier)
+  # ===================================================================
+  - name: settings
+    label: Réglages du site
+    type: file
+    path: src/_data/settings.json
+    format: json
+    fields:
+      - name: siteUrl
+        label: Adresse du site
+        type: string
+        description: Ex. https://labs.dataafriquehub.org — sert aux aperçus de partage et au référencement.
+      - name: contactEmail
+        label: Email de contact
+        type: string
+      - name: location
+        label: Lieu
+        type: string
+      - name: social
+        label: Réseaux sociaux
+        type: object
+        fields:
+          - { name: linkedin, label: LinkedIn, type: string }
+          - { name: whatsapp, label: WhatsApp (lien d'invitation), type: string }
+          - { name: github, label: GitHub (organisation), type: string }
+      - name: ecosystem
+        label: Liens de l'écosystème DAH
+        type: object
+        fields:
+          - { name: dataAfriqueHub, label: Data Afrique Hub, type: string }
+          - { name: dataTour, label: Data Tour, type: string }
+          - { name: academy, label: DAH Academy, type: string }
+          - { name: media, label: DAH Média, type: string }
+      - name: forms
+        label: Adresses d'envoi des formulaires
+        type: object
+        description: Adresses fournies par le service de formulaires (ex. https://formspree.io/f/xxxxxx). Voir le guide.
+        fields:
+          - { name: contact, label: Formulaire de contact, type: string }
+          - { name: propose, label: Formulaire « Proposer un projet », type: string }
+          - { name: newsletter, label: Inscription à la newsletter, type: string }
+      - name: stats
+        label: Chiffres clés (page À propos)
+        type: object
+        fields:
+          - { name: members, label: Membres de la communauté, type: string }
+          - { name: projects, label: Projets incubés, type: string }
+          - { name: countries, label: Pays représentés, type: string }
+          - { name: workshops, label: Ateliers organisés, type: string }

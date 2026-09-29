@@ -1,0 +1,108 @@
+---
+# Page PROJETS — /en/projects/ et /fr/projects/
+# Les cartes viennent des fichiers de src/content/projects/ (modifiables dans l'admin).
+# Les filtres et le bouton « Voir plus » sont gérés par assets/js/list-filter.js
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/projects/"
+pageKey: projects
+styles: [projects.css]
+scripts: [list-filter.js]
+---
+{%- set t = i18n[lang] -%}
+{%- set p = t.projects -%}
+{%- set all = collections.projects -%}
+{% from "partials/icons.njk" import icon %}
+
+{# ================= En-tête ================= #}
+<section class="page-hero page-hero--compact">
+  <div aria-hidden="true" class="blob blob-a" style="top: -240px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, var(--glow-a), transparent 68%)"></div>
+  <div aria-hidden="true" class="blob blob-b" style="top: 60px; left: -260px; width: 520px; height: 520px; background: radial-gradient(circle, var(--glow-b), transparent 68%)"></div>
+  <div class="container page-hero__inner page-hero__row">
+    <div style="max-width: 720px">
+      <div class="eyebrow enter d1">{{ p.hero.kicker }}</div>
+      <h1 class="h-page enter d2">{{ p.hero.title1 }} <span class="accent">{{ p.hero.title2 }}</span></h1>
+      <p class="lead enter d3" style="margin-top: 24px">{{ p.hero.lead }}</p>
+    </div>
+    <a href="#propose" class="btn btn-primary enter d4">{{ p.hero.cta }} {{ icon("arrow") }}</a>
+  </div>
+</section>
+
+{# ================= Liste des projets ================= #}
+<section class="section-tight">
+  <div class="container" data-list data-filter-key="status"
+       data-label-many="{{ p.filters.shown }}" data-label-one="{{ p.filters.shownOne }}"
+       data-page-size="9">
+
+    <div class="filters enter d5">
+      <div class="chips" role="group" aria-label="{{ p.filters.label }}">
+        {%- for f in ["all", "progress", "live", "open"] %}
+        {%- set count = all.length if f == "all" else (all | whereData("status", f) | length) %}
+        <button type="button" class="chip" data-filter="{{ f }}" aria-pressed="{{ 'true' if f == 'all' else 'false' }}">
+          {{ p.filters[f] }}<span class="chip-count">{{ count }}</span>
+        </button>
+        {%- endfor %}
+      </div>
+      <span class="results-count" data-count aria-live="polite">{{ p.filters.shown | fill(all.length) }}</span>
+    </div>
+
+    <div class="grid-3" data-items>
+      {%- for project in all %}
+        {% include "partials/project-card.njk" %}
+      {%- endfor %}
+    </div>
+
+    <div class="card empty-state" data-empty {% if all.length %}hidden{% endif %}>
+      <strong>{{ p.empty }}</strong>
+    </div>
+
+    <div class="load-more" data-more hidden>
+      <button type="button" class="btn btn-outline">{{ t.common.loadMore }} {{ icon("plus") }}</button>
+    </div>
+  </div>
+</section>
+
+{# ================= Proposer un projet ================= #}
+<section id="propose" class="section section-alt">
+  <div class="container propose-grid">
+    <div data-reveal>
+      <div class="eyebrow">{{ p.propose.kicker }}</div>
+      <h2 class="h-section">{{ p.propose.title }}</h2>
+      <p class="para" style="margin-top: 16px">{{ p.propose.paragraph }}</p>
+      <ol class="check-list" style="list-style: none; padding: 0">
+        {%- for n in [1, 2, 3] %}
+        <li class="check-item">
+          <span class="check-num" aria-hidden="true">{{ n }}</span>
+          <div><strong>{{ p.propose["s" + n + "t"] }}</strong><p class="card-text">{{ p.propose["s" + n + "d"] }}</p></div>
+        </li>
+        {%- endfor %}
+      </ol>
+    </div>
+
+    {# Formulaire envoyé par assets/js/forms.js vers l'adresse de settings.json → forms.propose #}
+    <form class="card form propose-form" data-reveal data-form="propose" action="{{ settings.forms.propose }}" method="POST">
+      <div class="form-row">
+        <div class="form-group"><label class="field-label" for="p-name">{{ p.propose.fName }} *</label><input class="field" id="p-name" name="name" type="text" required autocomplete="name"></div>
+        <div class="form-group"><label class="field-label" for="p-email">{{ p.propose.fEmail }} *</label><input class="field" id="p-email" name="email" type="email" required autocomplete="email"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="field-label" for="p-title">{{ p.propose.fProject }} *</label><input class="field" id="p-title" name="project" type="text" required></div>
+        <div class="form-group"><label class="field-label" for="p-domain">{{ p.propose.fDomain }}</label>
+          <select class="field" id="p-domain" name="domain">
+            {%- for n in [1, 2, 3, 4, 5] %}<option>{{ p.propose["o" + n] }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label class="field-label" for="p-desc">{{ p.propose.fDesc }} *</label><textarea class="field" id="p-desc" name="description" rows="5" required placeholder="{{ p.propose.fDescPh }}"></textarea></div>
+      <div class="form-group"><label class="field-label" for="p-repo">{{ p.propose.fRepo }}</label><input class="field" id="p-repo" name="repository" type="url" placeholder="https://github.com/…"></div>
+      <input type="hidden" name="_form" value="propose-project">
+      <input type="hidden" name="language" value="{{ lang }}">
+      <div class="honeypot" aria-hidden="true"><label>Leave empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+      <button type="submit" class="btn btn-primary" style="align-self: flex-start">{{ p.propose.submit }} {{ icon("arrow") }}</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>

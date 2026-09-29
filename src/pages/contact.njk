@@ -1,0 +1,95 @@
+---
+# Page CONTACT — /en/contact/ et /fr/contact/
+# Le formulaire est envoyé par assets/js/forms.js vers l'adresse
+# indiquée dans settings.json → forms.contact (voir le README).
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/contact/"
+pageKey: contact
+styles: [contact.css]
+---
+{%- set t = i18n[lang] -%}
+{%- set k = t.contact -%}
+{% from "partials/icons.njk" import icon, brandIcon %}
+
+<section class="page-hero page-hero--compact">
+  <div aria-hidden="true" class="blob blob-a" style="top: -240px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, var(--glow-a), transparent 68%)"></div>
+  <div aria-hidden="true" class="blob blob-b" style="top: 60px; left: -260px; width: 520px; height: 520px; background: radial-gradient(circle, var(--glow-b), transparent 68%)"></div>
+  <div class="container page-hero__inner">
+    <div style="max-width: 720px">
+      <div class="eyebrow enter d1">{{ k.hero.kicker }}</div>
+      <h1 class="h-page enter d2">{{ k.hero.title1 }} <span class="accent">{{ k.hero.title2 }}</span></h1>
+      <p class="lead enter d3" style="margin-top: 24px">{{ k.hero.lead }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container contact-grid">
+
+    {# ---------- Formulaire ---------- #}
+    <form class="card form contact-form enter d4" data-form="contact" action="{{ settings.forms.contact }}" method="POST">
+      <div class="form-row">
+        <div class="form-group"><label class="field-label" for="c-name">{{ k.form.name }} *</label><input class="field" id="c-name" name="name" type="text" required autocomplete="name"></div>
+        <div class="form-group"><label class="field-label" for="c-email">{{ k.form.email }} *</label><input class="field" id="c-email" name="email" type="email" required autocomplete="email"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="field-label" for="c-subject">{{ k.form.subject }}</label>
+          <select class="field" id="c-subject" name="subject">
+            {%- for n in [1, 2, 3, 4, 5, 6] %}<option>{{ k.form["o" + n] }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="form-group"><label class="field-label" for="c-org">{{ k.form.org }}</label><input class="field" id="c-org" name="organization" type="text" autocomplete="organization"></div>
+      </div>
+      <div class="form-group"><label class="field-label" for="c-msg">{{ k.form.message }} *</label><textarea class="field" id="c-msg" name="message" rows="6" required placeholder="{{ k.form.messagePh }}"></textarea></div>
+      <label class="check" for="c-consent"><input id="c-consent" name="consent" type="checkbox" value="yes" required><span>{{ k.form.consent }}</span></label>
+      <input type="hidden" name="_form" value="contact">
+      <input type="hidden" name="language" value="{{ lang }}">
+      <div class="honeypot" aria-hidden="true"><label>Leave empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+      <button type="submit" class="btn btn-primary" style="align-self: flex-start">{{ k.form.submit }} {{ icon("arrow") }}</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+
+    {# ---------- Coordonnées ---------- #}
+    <div class="contact-side">
+      <div class="card info-card enter d5">
+        <div class="info-row">
+          <span class="icon-badge">{{ icon("mail", 20) }}</span>
+          <div>
+            <div class="mini-label">{{ k.info.email }}</div>
+            <div class="info-value">
+              {%- if settings.contactEmail %}<a href="mailto:{{ settings.contactEmail }}">{{ settings.contactEmail }}</a>{% else %}{{ t.common.toBeAdded }}{% endif -%}
+            </div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="icon-badge">{{ icon("pin", 20) }}</span>
+          <div><div class="mini-label">{{ k.info.location }}</div><div class="info-value">{{ settings.location }}</div></div>
+        </div>
+        <div class="info-row info-row--stack">
+          <div class="mini-label">{{ k.info.follow }}</div>
+          <div class="social-row">
+            <a href="{{ settings.social.linkedin }}" class="social-btn" target="_blank" rel="noopener">{{ icon("linkedin") }}LinkedIn</a>
+            <a href="{{ settings.social.whatsapp }}" class="social-btn" target="_blank" rel="noopener">{{ icon("whatsapp") }}WhatsApp</a>
+            <a href="{{ settings.social.github }}" class="social-btn" target="_blank" rel="noopener">{{ icon("github") }}GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-label" style="margin-top: 8px">{{ k.ways.title }}</div>
+      {%- for w in [["1","innovation","projects/#propose"],["2","recherche","blog/"],["3","communaute","community/"]] %}
+      <a href="/{{ lang }}/{{ w[2] }}" class="card card-hover spot way-card" data-reveal>
+        {{ brandIcon(w[1], 28) }}
+        <div class="way-card__text">
+          <div class="way-card__title">{{ k.ways["w" + w[0] + "t"] }}</div>
+          <div class="way-card__desc">{{ k.ways["w" + w[0] + "d"] }}</div>
+        </div>
+        <span class="link-arrow" aria-hidden="true">{{ icon("arrow", 18) }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

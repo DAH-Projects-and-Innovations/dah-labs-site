@@ -1,0 +1,27 @@
+{
+  "siteUrl": "",
+  "contactEmail": "",
+  "location": "Abidjan, Côte d'Ivoire",
+  "social": {
+    "linkedin": "#",
+    "whatsapp": "#",
+    "github": "#"
+  },
+  "ecosystem": {
+    "dataAfriqueHub": "https://dataafriquehub.org/",
+    "dataTour": "https://datatour.dataafriquehub.org/",
+    "academy": "#",
+    "media": "#"
+  },
+  "forms": {
+    "contact": "",
+    "propose": "",
+    "newsletter": ""
+  },
+  "stats": {
+    "members": "[X]",
+    "projects": "[X]",
+    "countries": "[X]",
+    "workshops": "[X]"
+  }
+}
