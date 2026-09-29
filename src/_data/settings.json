@@ -1,11 +1,11 @@
 {
-  "siteUrl": "",
+  "siteUrl": "https://dah-projects-and-innovations.github.io/dah-labs-site",
   "contactEmail": "",
   "location": "Abidjan, Côte d'Ivoire",
   "social": {
     "linkedin": "#",
     "whatsapp": "#",
-    "github": "#"
+    "github": "https://github.com/DAH-Projects-and-Innovations"
   },
   "ecosystem": {
     "dataAfriqueHub": "https://dataafriquehub.org/",
