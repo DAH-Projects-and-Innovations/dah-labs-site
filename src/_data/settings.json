@@ -1,9 +1,10 @@
 {
   "siteUrl": "https://dah-projects-and-innovations.github.io/dah-labs-site",
   "contactEmail": "dataafriquehub@gmail.com",
+  "location": "Benin",
   "social": {
     "linkedin": "www.linkedin.com/company/dah-lab/posts/",
-    "whatsapp": "#",
+    "whatsapp": "https://chat.whatsapp.com/CDZwj60oMgN4mZCD3QhmXP",
     "github": "https://github.com/DAH-Projects-and-Innovations"
   },
   "ecosystem": {
