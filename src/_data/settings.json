@@ -1,7 +1,5 @@
 {
   "siteUrl": "https://dah-projects-and-innovations.github.io/dah-labs-site",
-  "contactEmail": "",
-  "location": "",
   "social": {
     "linkedin": "#",
     "whatsapp": "#",
@@ -13,15 +11,10 @@
     "academy": "#",
     "media": "#"
   },
-  "forms": {
-    "contact": "",
-    "propose": "",
-    "newsletter": ""
-  },
   "stats": {
-    "members": "[X]",
-    "projects": "[X]",
-    "countries": "[X]",
-    "workshops": "[X]"
+    "members": "12",
+    "projects": "3",
+    "countries": "4",
+    "workshops": "1"
   }
 }
