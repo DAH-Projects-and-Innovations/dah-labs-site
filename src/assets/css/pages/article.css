@@ -188,6 +188,10 @@
 /* Formule affichée par KaTeX : on retire le style « texte brut » */
 .math-block .katex-display { margin: 0; }
 .math-block:has(.katex) { font-family: inherit; white-space: normal; }
+/* KaTeX utilise lui aussi les classes « accent » (x̄, ŷ) et « tag » (\tag{1}) :
+   on neutralise ici les styles du site qui portent le même nom. */
+.math-block .accent { color: inherit; }
+.math-block .tag { display: inline; padding: 0; border-radius: 0; background: none; font-size: inherit; font-weight: inherit; color: inherit; }
 
 @media (max-width: 760px) {
   .post { padding: 40px 0 64px; }
