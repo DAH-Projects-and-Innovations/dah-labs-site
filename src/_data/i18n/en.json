@@ -62,6 +62,10 @@
     "live": "Deployed",
     "open": "Open to contributors"
   },
+  "visibility": {
+    "public": "Public",
+    "private": "Private"
+  },
   "forms": {
     "sending": "Sending…",
     "success": "Thank you! Your message has been sent.",
@@ -146,7 +150,7 @@
     "projects": {
       "kicker": "Our projects",
       "title": "Projects that answer real needs",
-      "paragraph": "Open-source projects led by the community. Click a project to open its code on GitHub or the live version.",
+      "paragraph": "Community-led projects, public or private. Click a public project to open its code on GitHub or its live version.",
       "more": "See all projects",
       "live": "Live site",
       "proposeTitle": "Your project here",
@@ -258,7 +262,7 @@
       "kicker": "Projects",
       "title1": "Open projects,",
       "title2": "real impact.",
-      "lead": "Every project is open source and built by the community. Open one to read its code on GitHub or try the live version.",
+      "lead": "Projects built by the community. Click a public project to read its code on GitHub or try the live version; private projects are presented without a link.",
       "cta": "Propose a project"
     },
     "filters": {

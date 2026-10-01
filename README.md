@@ -229,7 +229,7 @@ Dans **Réglages du site** : adresse du site, email de contact, liens LinkedIn /
 Le site contient des **contenus d'exemple**, à compléter ou remplacer depuis l'admin :
 
 - [ ] **Membres** : 8 fiches « [Nom complet] » en brouillon → remplir nom, rôle, photo, liens, puis décocher « Brouillon ».
-- [ ] **Projets** : Nutri-IA et Hub RAG Assistant → ajouter les liens GitHub et démo. 4 projets d'exemple en brouillon à remplir ou supprimer.
+- [ ] **Projets** : Hub RAG Assistant → ajouter les liens GitHub et démo (Afrinutri est privé : présenté sans lien). 4 projets d'exemple en brouillon à remplir ou supprimer.
 - [ ] **Articles** : l'article RAG (EN + FR) est publié. 9 articles en brouillon contiennent un plan à rédiger (dont un « guide express » pour écrire sur le blog).
 - [ ] **Activités** : annoncer les premiers webinaires. Les 2 activités d'exemple en brouillon sont à supprimer.
 - [ ] **Réglages du site** : liens X, DAH Academy et DAH Média.

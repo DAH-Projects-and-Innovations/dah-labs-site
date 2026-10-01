@@ -1,16 +1,20 @@
 {#
   project-card.njk — une carte « projet »
   Reçoit la variable `project` (un fichier de src/content/projects/).
-  Toute la carte est cliquable : elle ouvre la version en ligne du projet,
-  ou à défaut son dépôt GitHub.
+  Projet PUBLIC : toute la carte est cliquable et ouvre la version en ligne
+  du projet, ou à défaut son dépôt GitHub.
+  Projet PRIVÉ (visibility: private) : la carte présente le projet, avec un
+  cadenas, mais sans aucun lien.
 #}
 {% from "partials/icons.njk" import icon %}
 {%- set p = project.data -%}
-{%- set mainLink = p | projectLink -%}
-<article class="card card-hover spot project-card" data-reveal data-status="{{ p.status }}">
+{%- set isPrivate = p.visibility == "private" -%}
+{%- set mainLink = "" if isPrivate else (p | projectLink) -%}
+<article class="card{% if mainLink %} card-hover{% endif %} spot project-card" data-reveal data-status="{{ p.status }}">
   <div class="project-visual project-visual--{{ (loop.index0 % 3) + 1 if loop else 1 }}">
     <span class="project-tile"><img class="icon-img" src="/assets/images/icons/{{ p.icon or 'innovation' }}.png" alt="" width="58" height="58" loading="lazy"></span>
     <span class="status status--{{ p.status }}"><span class="dot"></span>{{ t.status[p.status] }}</span>
+    <span class="visibility">{{ icon("lock" if isPrivate else "globe", 13) }}{{ t.visibility.private if isPrivate else t.visibility.public }}</span>
   </div>
   <div class="project-body">
     <h3 class="card-title">
@@ -27,7 +31,7 @@
       {%- for tag in p.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
     </div>
     {%- endif %}
-    {%- if (p.github | isLink) or (p.demo | isLink) %}
+    {%- if not isPrivate and ((p.github | isLink) or (p.demo | isLink)) %}
     <div class="project-links above">
       {%- if p.github | isLink %}
       <a class="mini-link" href="{{ p.github }}" target="_blank" rel="noopener">{{ icon("github", 14) }}{{ t.common.github }}</a>

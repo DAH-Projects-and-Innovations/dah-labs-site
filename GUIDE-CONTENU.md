@@ -86,7 +86,8 @@ Remplacez `python` par le langage utilisé : `sql`, `r`, `bash`, `javascript`…
 
 - **Nom du projet**, **Statut** (En cours · Déployé · Ouvert aux contributions).
 - **Description** en français (obligatoire) et en anglais (facultatif : sinon le français s'affiche).
-- **Lien du dépôt GitHub** et **Lien de la version en ligne** : un clic sur la carte ouvre la version en ligne, sinon le GitHub.
+- **Visibilité** : **Public**, un clic sur la carte ouvre le projet ; **Privé**, le projet est présenté avec un cadenas, sans aucun lien.
+- **Lien du dépôt GitHub** et **Lien de la version en ligne** (projets publics) : un clic sur la carte ouvre la version en ligne, sinon le GitHub.
 - **Ordre d'affichage** : 1 = en premier. Les **2 premiers** apparaissent sur la page d'accueil.
 
 ## Annoncer une activité (webinaire, atelier, rencontre)

@@ -135,7 +135,7 @@ content:
     filename: "{primary}.md"
     format: yaml-frontmatter
     view:
-      fields: [title, status, order, draft]
+      fields: [title, status, visibility, order, draft]
       primary: title
       sort: [order, title]
       default:
@@ -156,6 +156,16 @@ content:
             - { name: progress, label: En cours }
             - { name: live, label: Déployé }
             - { name: open, label: Ouvert aux contributions }
+      - name: visibility
+        label: Visibilité
+        type: select
+        required: true
+        default: public
+        description: "Public : un clic sur la carte ouvre le projet (version en ligne, sinon GitHub). Privé : le projet est présenté avec un cadenas, sans lien."
+        options:
+          values:
+            - { name: public, label: Public }
+            - { name: private, label: Privé }
       - name: date
         label: Date d'ajout
         type: date
@@ -181,11 +191,11 @@ content:
       - name: github
         label: Lien du dépôt GitHub
         type: string
-        description: Ex. https://github.com/… (laisser vide si pas encore de dépôt)
+        description: Ex. https://github.com/… (laisser vide si pas encore de dépôt). Jamais affiché pour un projet privé.
       - name: demo
         label: Lien de la version en ligne
         type: string
-        description: Si rempli, un clic sur la carte ouvre ce lien ; sinon, le dépôt GitHub.
+        description: Si rempli, un clic sur la carte ouvre ce lien ; sinon, le dépôt GitHub. Jamais affiché pour un projet privé.
       - name: order
         label: Ordre d'affichage
         type: number
@@ -371,7 +381,7 @@ content:
         label: Chiffres clés (page À propos)
         type: object
         fields:
-          - { name: members, label: Membres de la communauté, type: string, description: "Affiché sur la page À propos et dans le panneau de l'accueil." }
+          - { name: members, label: Membres de la communauté, type: string }
           - { name: projects, label: Projets incubés, type: string }
           - { name: countries, label: Pays représentés, type: string }
           - { name: workshops, label: Ateliers organisés, type: string }
