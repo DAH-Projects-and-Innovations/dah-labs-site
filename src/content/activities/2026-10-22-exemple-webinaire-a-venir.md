@@ -12,5 +12,5 @@ summary_fr: "[Deux ou trois phrases sur le sujet du webinaire et ce que les
 summary_en: "[Two or three sentences on the webinar topic and what participants
   will learn.]"
 register: https://meet.google.com/
-draft: false
+draft: true
 ---
