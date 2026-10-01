@@ -66,7 +66,9 @@ styles: [home.css]
             <div class="panel__title">{{ h.panel.title }}</div>
             <div class="stats-mini">
               <div class="stat"><b>{{ collections.projects.length }}</b><span>{{ h.panel.stat1 }}</span></div>
-              <div class="stat"><b>{{ collections.members.length or "—" }}</b><span>{{ h.panel.stat2 }}</span></div>
+              {#- Membres : le chiffre des Réglages du site (le même que sur la page À propos),
+                  à défaut le nombre de fiches publiées dans « Membres de l'équipe » #}
+              <div class="stat"><b>{{ settings.stats.members or collections.members.length or "—" }}</b><span>{{ h.panel.stat2 }}</span></div>
               <div class="stat"><b>{{ articles.length }}</b><span>{{ h.panel.stat3 }}</span></div>
             </div>
             <div class="mini-label">{{ h.panel.activityLabel }}</div>

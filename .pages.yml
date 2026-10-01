@@ -342,7 +342,7 @@ content:
       - name: location
         label: Lieu
         type: string
-        description: Ville et pays du siège (ex. Abidjan, Côte d'Ivoire), affichés sur l'accueil, la page Contact et le pied de page. Laissez vide pour ne l'afficher nulle part.
+        description: Ville ou pays de la base (ex. Bénin), affiché dans le panneau de l'accueil et sur la page Contact. Laissez vide pour ne l'afficher nulle part.
       - name: social
         label: Réseaux sociaux
         type: object
@@ -371,7 +371,7 @@ content:
         label: Chiffres clés (page À propos)
         type: object
         fields:
-          - { name: members, label: Membres de la communauté, type: string }
+          - { name: members, label: Membres de la communauté, type: string, description: "Affiché sur la page À propos et dans le panneau de l'accueil." }
           - { name: projects, label: Projets incubés, type: string }
           - { name: countries, label: Pays représentés, type: string }
           - { name: workshops, label: Ateliers organisés, type: string }
