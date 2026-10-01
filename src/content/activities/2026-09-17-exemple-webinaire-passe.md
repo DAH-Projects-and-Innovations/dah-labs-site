@@ -11,5 +11,5 @@ summary_fr: "[Deux phrases qui résument la session. Ajoutez le lien du replay
 summary_en: "[Two sentences summarizing the session. Add the replay link once
   the video is online.]"
 replay: https://www.youtube.com/
-draft: false
+draft: true
 ---
