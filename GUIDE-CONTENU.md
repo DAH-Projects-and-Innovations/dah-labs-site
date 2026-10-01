@@ -9,7 +9,7 @@ Tout se fait dans l'**admin** : **[app.pagescms.org](https://app.pagescms.org)**
 
 1. Vous recevez une **invitation par email** de la part de l'équipe technique.
 2. Cliquez sur le lien, puis ouvrez le dépôt **dah-labs-site**.
-3. À gauche, quatre rubriques : **Articles du blog**, **Projets**, **Membres de l'équipe**, **Réglages du site**.
+3. À gauche, cinq rubriques : **Articles du blog**, **Projets**, **Activités (webinaires)**, **Membres de l'équipe**, **Réglages du site**.
 
 > Après chaque enregistrement, le site se met à jour tout seul en **1 à 2 minutes**. Rechargez la page du site pour voir le changement.
 
@@ -89,6 +89,26 @@ Remplacez `python` par le langage utilisé : `sql`, `r`, `bash`, `javascript`…
 - **Lien du dépôt GitHub** et **Lien de la version en ligne** : un clic sur la carte ouvre la version en ligne, sinon le GitHub.
 - **Ordre d'affichage** : 1 = en premier. Les **2 premiers** apparaissent sur la page d'accueil.
 
+## Annoncer une activité (webinaire, atelier, rencontre)
+
+**Activités (webinaires)** → bouton pour ajouter une nouvelle entrée.
+
+| Champ | Conseil |
+|---|---|
+| **Titre** | Le sujet de la session. |
+| **Type d'activité** | Webinaire · Atelier · Rencontre. |
+| **Date** | Le jour de l'activité. |
+| **Horaire** | Début et fin, avec le fuseau horaire : `15:00–16:30 GMT+1`. |
+| **Langue de l'activité** | Français ou English. |
+| **Intervenants** | Un nom par ligne, avec le rôle si besoin. |
+| **Description** | En français (obligatoire) et en anglais (facultatif : sinon le français s'affiche). |
+| **Lien d'inscription ou de connexion** | Formulaire d'inscription, lien Zoom, Google Meet, YouTube Live… |
+| **Lien du replay** | À ajouter après l'activité : l'adresse de la vidéo (YouTube…). |
+
+- Jusqu'à sa date (incluse), l'activité s'affiche dans **À venir**, avec un bouton **S'inscrire**.
+- Le lendemain, elle passe **toute seule** dans **Déjà passées** : le site est remis à jour chaque nuit. Pensez alors à ajouter le **lien du replay**.
+- Deux activités d'exemple, en brouillon, montrent le résultat : inspirez-vous-en, puis supprimez-les.
+
 ## Ajouter un membre de l'équipe
 
 **Membres de l'équipe** → bouton pour ajouter une nouvelle entrée : nom, rôle (FR et EN), une phrase de présentation, une photo carrée, liens LinkedIn et GitHub, ordre d'affichage.
@@ -97,7 +117,8 @@ Des fiches « [Nom complet] » existent déjà en brouillon : il suffit de les o
 ## Réglages du site
 
 **Réglages du site** regroupe ce qui apparaît sur plusieurs pages :
-liens des réseaux sociaux, email de contact, liens DAH Academy et DAH Média, chiffres clés de la page « À propos », adresses des formulaires.
+liens des réseaux sociaux (LinkedIn, WhatsApp, X, GitHub), email de contact, lieu, liens DAH Academy et DAH Média, chiffres clés de la page « À propos », adresses des formulaires.
+Le lieu n'apparaît sur le site que si son champ est rempli.
 
 ---
 

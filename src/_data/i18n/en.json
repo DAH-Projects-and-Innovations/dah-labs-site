@@ -9,6 +9,7 @@
       "home": "DAH Labs — Innovation & incubation by Data Afrique Hub",
       "about": "About",
       "projects": "Projects",
+      "activities": "Activities",
       "community": "Community",
       "blog": "Blog",
       "contact": "Contact",
@@ -20,6 +21,7 @@
     "label": "Main navigation",
     "about": "About",
     "projects": "Projects",
+    "activities": "Activities",
     "community": "Community",
     "blog": "Blog",
     "contact": "Contact",
@@ -294,6 +296,46 @@
     },
     "empty": "No project in this category yet."
   },
+  "activities": {
+    "hero": {
+      "kicker": "Activities",
+      "title1": "Webinars, workshops",
+      "title2": "and meetups.",
+      "lead": "Online sessions, open to everyone, to learn, share and build together. Sign up for the next ones or catch up on past sessions.",
+      "cta": "Propose a session"
+    },
+    "types": {
+      "webinar": "Webinar",
+      "workshop": "Workshop",
+      "meetup": "Meetup"
+    },
+    "langs": {
+      "fr": "In French",
+      "en": "In English"
+    },
+    "upcoming": {
+      "kicker": "Upcoming",
+      "title": "Next activities"
+    },
+    "past": {
+      "kicker": "Past",
+      "title": "Previous activities",
+      "paragraph": "Catch up on past sessions and their recordings."
+    },
+    "with": "With",
+    "register": "Register",
+    "replay": "Watch the replay",
+    "empty": {
+      "title": "No activity scheduled yet.",
+      "text": "Follow us so you don't miss the next session."
+    },
+    "propose": {
+      "kicker": "Get involved",
+      "title": "Want to host a webinar?",
+      "paragraph": "Have expertise, a project or field notes to share? Propose a topic and the team will help you prepare the session.",
+      "cta": "Propose a topic"
+    }
+  },
   "community": {
     "hero": {
       "kicker": "Community",
@@ -391,8 +433,9 @@
       "o2": "Propose a project",
       "o3": "Join the community",
       "o4": "Write for the blog",
-      "o5": "Press",
-      "o6": "Other",
+      "o5": "Host a webinar",
+      "o6": "Press",
+      "o7": "Other",
       "message": "Your message",
       "messagePh": "Tell us a bit about your request…",
       "consent": "I agree that DAH Labs may contact me about this request.",

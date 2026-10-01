@@ -14,6 +14,7 @@
 media:
   input: src/media      # dossier dans le dépôt
   output: /media        # adresse publique sur le site
+  rename: safe          # « Photo Équipe.jpg » devient « photo-equipe.jpg » (sans espaces ni accents)
 
 # ---------- Morceaux réutilisés dans plusieurs formulaires ----------
 components:
@@ -194,6 +195,82 @@ content:
         default: false
 
   # ===================================================================
+  # ACTIVITÉS (webinaires, ateliers, rencontres)
+  # ===================================================================
+  - name: activities
+    label: Activités (webinaires)
+    type: collection
+    path: src/content/activities
+    filename: "{year}-{month}-{day}-{primary}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, type, date, draft]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: type
+        label: Type d'activité
+        type: select
+        required: true
+        default: webinar
+        options:
+          values:
+            - { name: webinar, label: Webinaire }
+            - { name: workshop, label: Atelier }
+            - { name: meetup, label: Rencontre }
+      - name: date
+        label: Date
+        type: date
+        required: true
+        description: L'activité s'affiche dans « À venir » jusqu'à ce jour inclus, puis passe toute seule dans « Déjà passées ».
+        options:
+          format: yyyy-MM-dd
+      - name: time
+        label: Horaire
+        type: string
+        description: Heure de début et de fin, avec le fuseau horaire. Ex. 15:00–16:30 GMT+1
+      - name: lang
+        label: Langue de l'activité
+        type: select
+        default: fr
+        options:
+          values:
+            - { name: fr, label: Français }
+            - { name: en, label: English }
+      - name: speakers
+        label: Intervenants
+        type: string
+        list: true
+        description: Un nom par ligne, avec le rôle si besoin. Ex. Awa Diallo (data scientist)
+      - name: summary_fr
+        label: Description (français)
+        type: text
+        required: true
+        description: Deux ou trois phrases sur le sujet et ce que les participants vont apprendre.
+      - name: summary_en
+        label: Description (English)
+        type: text
+        description: Si vide, la version française est affichée.
+      - name: register
+        label: Lien d'inscription ou de connexion
+        type: string
+        description: Formulaire d'inscription, lien Zoom, Google Meet, YouTube Live… Le bouton « S'inscrire » s'affiche tant que l'activité est à venir.
+      - name: replay
+        label: Lien du replay (après l'activité)
+        type: string
+        description: Lien de la vidéo (YouTube…). La carte de l'activité passée ouvre alors cette vidéo.
+      - name: draft
+        component: draft
+        default: false
+
+  # ===================================================================
   # MEMBRES DE L'ÉQUIPE
   # ===================================================================
   - name: members
@@ -272,6 +349,7 @@ content:
         fields:
           - { name: linkedin, label: LinkedIn, type: string }
           - { name: whatsapp, label: WhatsApp (lien d'invitation), type: string }
+          - { name: x, label: X (Twitter), type: string, description: "Ex. https://x.com/nom-du-compte" }
           - { name: github, label: GitHub (organisation), type: string }
       - name: ecosystem
         label: Liens de l'écosystème DAH

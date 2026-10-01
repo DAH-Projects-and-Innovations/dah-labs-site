@@ -9,6 +9,7 @@
       "home": "DAH Labs — Innovation & incubation par Data Afrique Hub",
       "about": "À propos",
       "projects": "Projets",
+      "activities": "Activités",
       "community": "Communauté",
       "blog": "Blog",
       "contact": "Contact",
@@ -20,6 +21,7 @@
     "label": "Navigation principale",
     "about": "À propos",
     "projects": "Projets",
+    "activities": "Activités",
     "community": "Communauté",
     "blog": "Blog",
     "contact": "Contact",
@@ -294,6 +296,46 @@
     },
     "empty": "Aucun projet dans cette catégorie pour l'instant."
   },
+  "activities": {
+    "hero": {
+      "kicker": "Activités",
+      "title1": "Webinaires, ateliers",
+      "title2": "et rencontres.",
+      "lead": "Des sessions en ligne, ouvertes à toutes et à tous, pour apprendre, partager et construire ensemble. Inscrivez-vous aux prochaines ou revoyez les précédentes.",
+      "cta": "Proposer une intervention"
+    },
+    "types": {
+      "webinar": "Webinaire",
+      "workshop": "Atelier",
+      "meetup": "Rencontre"
+    },
+    "langs": {
+      "fr": "En français",
+      "en": "En anglais"
+    },
+    "upcoming": {
+      "kicker": "À venir",
+      "title": "Les prochaines activités"
+    },
+    "past": {
+      "kicker": "Déjà passées",
+      "title": "Les activités précédentes",
+      "paragraph": "Retrouvez les sessions passées et leurs replays."
+    },
+    "with": "Avec",
+    "register": "S'inscrire",
+    "replay": "Voir le replay",
+    "empty": {
+      "title": "Aucune activité programmée pour le moment.",
+      "text": "Suivez-nous pour ne pas manquer la prochaine session."
+    },
+    "propose": {
+      "kicker": "Intervenir",
+      "title": "Envie d'animer un webinaire ?",
+      "paragraph": "Une expertise, un projet ou un retour d'expérience à partager ? Proposez un sujet : l'équipe vous aide à préparer la session.",
+      "cta": "Proposer un sujet"
+    }
+  },
   "community": {
     "hero": {
       "kicker": "Communauté",
@@ -391,8 +433,9 @@
       "o2": "Proposer un projet",
       "o3": "Rejoindre la communauté",
       "o4": "Écrire pour le blog",
-      "o5": "Presse",
-      "o6": "Autre",
+      "o5": "Animer un webinaire",
+      "o6": "Presse",
+      "o7": "Autre",
       "message": "Votre message",
       "messagePh": "Dites-nous en un peu plus sur votre demande…",
       "consent": "J'accepte que DAH Labs me recontacte au sujet de cette demande.",

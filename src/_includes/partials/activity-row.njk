@@ -1,0 +1,32 @@
+{#
+  activity-row.njk — une activité À VENIR (grande carte sur toute la largeur)
+  Reçoit la variable `activity` (un fichier de src/content/activities/).
+  À gauche la date façon calendrier, au centre les infos, à droite « S'inscrire ».
+#}
+{% from "partials/icons.njk" import icon %}
+{%- set e = activity.data -%}
+<article class="card event-row" data-reveal>
+  <div class="event-date" aria-hidden="true">
+    <span class="event-date__day">{{ activity.date | readableDate(lang, "day") }}</span>
+    <span class="event-date__month">{{ activity.date | readableDate(lang, "monthShort") }}</span>
+  </div>
+  <div class="event-body">
+    <div class="event-labels">
+      <span class="tag tag-accent">{{ t.activities.types[e.type] or e.type }}</span>
+      {%- if e.lang %}<span class="lang-badge" title="{{ t.activities.langs[e.lang] }}"><span aria-hidden="true">{{ e.lang | upper }}</span><span class="sr-only">{{ t.activities.langs[e.lang] }}</span></span>{% endif %}
+      {%- if e.draft %}<span class="draft-badge">{{ t.common.draft }}</span>{% endif %}
+    </div>
+    <h3 class="card-title">{{ e.title }}</h3>
+    <p class="event-meta">
+      <time datetime="{{ activity.date | isoDate }}"><strong>{{ activity.date | readableDate(lang, "full") }}</strong></time>
+      {%- if e.time %} · {{ e.time }}{% endif %}
+    </p>
+    {%- if e.speakers and e.speakers.length %}
+    <p class="event-meta">{{ t.activities.with }} {{ e.speakers | join(", ") }}</p>
+    {%- endif %}
+    <p class="card-text">{{ e | tr("summary", lang) }}</p>
+  </div>
+  {%- if e.register | isLink %}
+  <a class="btn btn-primary btn-sm event-cta" href="{{ e.register }}" target="_blank" rel="noopener">{{ t.activities.register }} {{ icon("arrow") }}</a>
+  {%- endif %}
+</article>

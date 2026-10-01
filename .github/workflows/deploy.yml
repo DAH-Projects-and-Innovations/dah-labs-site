@@ -9,6 +9,9 @@
 #   4. publie _site sur GitHub Pages.
 # Durée : environ 1 à 2 minutes. Gratuit pour un dépôt public.
 # À activer une fois : Settings → Pages → Source : « GitHub Actions ».
+#
+# Le site est aussi reconstruit chaque nuit, pour que les activités dont
+# la date est passée quittent la liste « À venir » (page Activités).
 # =====================================================================
 name: Mise en ligne du site
 
@@ -16,6 +19,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:   # bouton « Run workflow » pour relancer à la main
+  schedule:
+    - cron: "30 0 * * *"   # chaque nuit à 00:30 UTC (01:30 au Bénin)
 
 permissions:
   contents: read

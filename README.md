@@ -78,6 +78,7 @@ dah-labs-site/
     │       ├── header.njk     ← le menu du haut (logo, liens, EN/FR, ☀️/🌙)
     │       ├── footer.njk     ← le pied de page (réseaux, écosystème, newsletter)
     │       ├── project-card.njk, article-card.njk, featured-article.njk, member-card.njk
+    │       ├── activity-row.njk, activity-card.njk ← une activité à venir / déjà passée
     │       ├── newsletter.njk ← l'encart « Recevez les prochains articles »
     │       ├── contribute.njk ← le bandeau bleu « Envie de contribuer ? »
     │       └── icons.njk      ← les petites icônes SVG et le motif « points de connexion »
@@ -86,6 +87,7 @@ dah-labs-site/
     │   ├── home.njk           → /en/            et /fr/
     │   ├── about.njk          → /en/about/      et /fr/about/
     │   ├── projects.njk       → /en/projects/   …
+    │   ├── activities.njk     → /en/activities/ (webinaires, ateliers, rencontres)
     │   ├── community.njk      → /en/community/
     │   ├── blog.njk           → /en/blog/
     │   ├── article.njk        → /en/blog/<article>/  (une page par article)
@@ -97,6 +99,7 @@ dah-labs-site/
     ├── content/               ── LE CONTENU (Markdown) — rempli par l'admin
     │   ├── articles/          ← un fichier par article (texte + titre, date, catégorie…)
     │   ├── projects/          ← un fichier par projet
+    │   ├── activities/        ← un fichier par activité (webinaire, atelier…)
     │   └── members/           ← un fichier par membre de l'équipe
     │
     ├── assets/
@@ -155,6 +158,8 @@ npm run build   # construit la version finale dans _site/ (sans les brouillons)
 
 **Pourquoi GitHub Pages ?** C'est gratuit pour un dépôt public, sans limite pratique de mises en ligne, et tout reste au même endroit que le code et l'admin.
 
+**Mise à jour de chaque nuit.** Le site est aussi reconstruit tous les jours à 00:30 UTC, pour qu'une activité dont la date est passée quitte toute seule la liste « À venir » de la page Activités. GitHub met ces tâches planifiées en pause quand le dépôt n'a reçu aucune modification pendant 60 jours : il suffit alors de les réactiver dans l'onglet **Actions**.
+
 **Autres hébergeurs possibles** (même réglage partout : commande `npm run build`, dossier `_site`) :
 - **Netlify** : le fichier `netlify.toml` est prêt. Attention, l'offre gratuite compte des « crédits » : environ **20 mises en ligne par mois**, et chaque enregistrement dans l'admin en déclenche une. Si les crédits sont épuisés, le site est mis en pause jusqu'au mois suivant.
 - **Cloudflare Pages** ou l'hébergement de Data Afrique Hub : copier le contenu de `_site/` après `npm run build`.
@@ -162,7 +167,7 @@ npm run build   # construit la version finale dans _site/ (sans les brouillons)
 ### Étape 3 — Brancher l'admin (Pages CMS)
 1. Aller sur **[app.pagescms.org](https://app.pagescms.org)** et se connecter avec GitHub.
 2. Autoriser l'application Pages CMS sur le dépôt `dah-labs-site`.
-3. Ouvrir le dépôt : les formulaires **Articles du blog**, **Projets**, **Membres de l'équipe** et **Réglages du site** apparaissent (ils sont décrits dans `.pages.yml`).
+3. Ouvrir le dépôt : les formulaires **Articles du blog**, **Projets**, **Activités**, **Membres de l'équipe** et **Réglages du site** apparaissent (ils sont décrits dans `.pages.yml`).
 4. Inviter les rédacteurs : dans Pages CMS, **Collaborators** → leur adresse email. **Ils n'ont pas besoin de compte GitHub.**
 
 ### Étape 4 — Brancher les formulaires (contact, proposer un projet, newsletter)
@@ -175,7 +180,7 @@ Les messages arrivent alors par email. L'offre gratuite de Formspree compte 50 e
 Pour une vraie newsletter (envoi d'emails à tous les abonnés), on pourra plus tard remplacer l'adresse « Newsletter » par celle d'un outil comme Brevo ou Mailchimp.
 
 ### Étape 5 — Remplir les réglages
-Dans **Réglages du site** : adresse du site, email de contact, liens LinkedIn / WhatsApp / GitHub, liens DAH Academy et DAH Média, chiffres clés de la page À propos.
+Dans **Réglages du site** : adresse du site, email de contact, liens LinkedIn / WhatsApp / X / GitHub, liens DAH Academy et DAH Média, chiffres clés de la page À propos.
 
 ---
 
@@ -226,7 +231,8 @@ Le site contient des **contenus d'exemple**, à compléter ou remplacer depuis l
 - [ ] **Membres** : 8 fiches « [Nom complet] » en brouillon → remplir nom, rôle, photo, liens, puis décocher « Brouillon ».
 - [ ] **Projets** : Nutri-IA et Hub RAG Assistant → ajouter les liens GitHub et démo. 4 projets d'exemple en brouillon à remplir ou supprimer.
 - [ ] **Articles** : l'article RAG (EN + FR) est publié. 9 articles en brouillon contiennent un plan à rédiger (dont un « guide express » pour écrire sur le blog).
-- [ ] **Réglages du site** : liens LinkedIn, WhatsApp, GitHub, DAH Academy, DAH Média ; email de contact ; chiffres « [X] » ; adresse du site.
+- [ ] **Activités** : annoncer les premiers webinaires. Les 2 activités d'exemple en brouillon sont à supprimer.
+- [ ] **Réglages du site** : liens X, DAH Academy et DAH Média.
 - [ ] **Formulaires** : créer les 3 formulaires Formspree et coller leurs adresses.
 - [ ] **Version mobile** : le site s'adapte déjà aux téléphones (menu ☰, colonnes empilées). Une passe de finition est prévue après validation de la version bureau.
 

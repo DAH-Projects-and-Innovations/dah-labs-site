@@ -1,0 +1,35 @@
+{#
+  activity-card.njk — une activité DÉJÀ PASSÉE (carte compacte)
+  Reçoit la variable `activity` (un fichier de src/content/activities/).
+  Si un replay existe, toute la carte ouvre la vidéo.
+#}
+{% from "partials/icons.njk" import icon %}
+{%- set e = activity.data -%}
+<article class="card card-hover spot event-card" data-reveal>
+  <div class="event-card__top">
+    <div class="event-date event-date--sm" aria-hidden="true">
+      <span class="event-date__day">{{ activity.date | readableDate(lang, "day") }}</span>
+      <span class="event-date__month">{{ activity.date | readableDate(lang, "monthShort") }}</span>
+    </div>
+    <div class="event-labels">
+      <span class="tag">{{ t.activities.types[e.type] or e.type }}</span>
+      {%- if e.lang %}<span class="lang-badge" title="{{ t.activities.langs[e.lang] }}"><span aria-hidden="true">{{ e.lang | upper }}</span><span class="sr-only">{{ t.activities.langs[e.lang] }}</span></span>{% endif %}
+      {%- if e.draft %}<span class="draft-badge">{{ t.common.draft }}</span>{% endif %}
+    </div>
+  </div>
+  <h3 class="card-title">
+    {%- if e.replay | isLink %}
+    <a class="stretched" href="{{ e.replay }}" target="_blank" rel="noopener">{{ e.title }}</a>
+    {%- else %}
+    {{ e.title }}
+    {%- endif %}
+  </h3>
+  <p class="event-meta">
+    <time datetime="{{ activity.date | isoDate }}">{{ activity.date | readableDate(lang) }}</time>
+    {%- if e.speakers and e.speakers.length %} · {{ t.activities.with }} {{ e.speakers | join(", ") }}{% endif %}
+  </p>
+  <p class="card-text">{{ e | tr("summary", lang) }}</p>
+  {%- if e.replay | isLink %}
+  <div class="event-card__foot"><span class="link-arrow">{{ icon("video", 16) }} {{ t.activities.replay }}</span></div>
+  {%- endif %}
+</article>

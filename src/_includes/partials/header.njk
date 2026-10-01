@@ -4,12 +4,15 @@
 #}
 {% from "partials/icons.njk" import icon %}
 {%- set menu = [
-  { key: "about",     label: t.nav.about },
-  { key: "projects",  label: t.nav.projects },
-  { key: "community", label: t.nav.community },
-  { key: "blog",      label: t.nav.blog },
-  { key: "contact",   label: t.nav.contact }
+  { key: "about",      label: t.nav.about },
+  { key: "projects",   label: t.nav.projects },
+  { key: "activities", label: t.nav.activities },
+  { key: "community",  label: t.nav.community },
+  { key: "blog",       label: t.nav.blog },
+  { key: "contact",    label: t.nav.contact, mobileOnly: true }
 ] -%}
+{#- « mobileOnly » : lien visible seulement dans le menu ☰ (tablette, mobile).
+    Sur ordinateur, Contact reste accessible depuis le pied de page. #}
 <header class="site-header" data-header>
   <div class="container header-row">
 
@@ -21,7 +24,7 @@
 
     <nav class="nav" id="site-nav" aria-label="{{ t.nav.label }}">
       {%- for item in menu %}
-      <a class="navlink" href="/{{ lang }}/{{ item.key }}/"{% if pageKey == item.key or (pageKey == "article" and item.key == "blog") %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      <a class="navlink{% if item.mobileOnly %} navlink--mobile{% endif %}" href="/{{ lang }}/{{ item.key }}/"{% if pageKey == item.key or (pageKey == "article" and item.key == "blog") %} aria-current="page"{% endif %}>{{ item.label }}</a>
       {%- endfor %}
     </nav>
 

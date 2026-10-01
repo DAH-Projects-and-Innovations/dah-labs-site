@@ -1,0 +1,91 @@
+---
+# Page ACTIVITÉS — /en/activities/ et /fr/activities/
+# Les activités (webinaires, ateliers, rencontres) viennent des fichiers de
+# src/content/activities/ (modifiables dans l'admin, rubrique « Activités »).
+# « À venir » ou « Déjà passées » dépend de la date : voir les filtres
+# upcoming et past dans eleventy.config.js.
+layout: layouts/base.njk
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/activities/"
+pageKey: activities
+styles: [activities.css]
+---
+{%- set t = i18n[lang] -%}
+{%- set a = t.activities -%}
+{%- set upcoming = collections.activities | upcoming -%}
+{%- set past = collections.activities | past -%}
+{% from "partials/icons.njk" import icon %}
+
+{# ================= En-tête ================= #}
+<section class="page-hero page-hero--compact">
+  <div aria-hidden="true" class="blob blob-a" style="top: -240px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, var(--glow-a), transparent 68%)"></div>
+  <div aria-hidden="true" class="blob blob-b" style="top: 60px; left: -260px; width: 520px; height: 520px; background: radial-gradient(circle, var(--glow-b), transparent 68%)"></div>
+  <div class="container page-hero__inner page-hero__row">
+    <div style="max-width: 720px">
+      <div class="eyebrow enter d1">{{ a.hero.kicker }}</div>
+      <h1 class="h-page enter d2">{{ a.hero.title1 }} <span class="accent">{{ a.hero.title2 }}</span></h1>
+      <p class="lead enter d3" style="margin-top: 24px">{{ a.hero.lead }}</p>
+    </div>
+    <a href="#propose" class="btn btn-primary enter d4">{{ a.hero.cta }} {{ icon("arrow") }}</a>
+  </div>
+</section>
+
+{# ================= À venir ================= #}
+<section class="section-tight">
+  <div class="container">
+    <div class="eyebrow event-heading enter d5">{{ a.upcoming.kicker }}</div>
+    {%- if upcoming.length %}
+    <div class="event-list">
+      {%- for activity in upcoming %}
+        {% include "partials/activity-row.njk" %}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <div class="card empty-state">
+      <strong>{{ a.empty.title }}</strong>
+      <p class="card-text" style="margin-top: 8px">{{ a.empty.text }}</p>
+      <div class="event-social">
+        <a href="{{ settings.social.linkedin }}" class="social-btn" target="_blank" rel="noopener">{{ icon("linkedin") }}LinkedIn</a>
+        <a href="{{ settings.social.whatsapp }}" class="social-btn" target="_blank" rel="noopener">{{ icon("whatsapp") }}WhatsApp</a>
+      </div>
+    </div>
+    {%- endif %}
+  </div>
+</section>
+
+{# ================= Déjà passées (avec les replays) ================= #}
+{%- if past.length %}
+<section class="section section-alt">
+  <div class="container">
+    <div class="head-row" data-reveal>
+      <div class="head-block">
+        <div class="eyebrow">{{ a.past.kicker }}</div>
+        <h2 class="h-section">{{ a.past.title }}</h2>
+        <p class="para">{{ a.past.paragraph }}</p>
+      </div>
+    </div>
+    <div class="grid-3">
+      {%- for activity in past %}
+        {% include "partials/activity-card.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{# ================= Proposer une intervention ================= #}
+<section id="propose" class="{{ 'section' if past.length else 'section-tight' }}">
+  <div class="container">
+    <div class="card event-propose" data-reveal>
+      <div>
+        <div class="eyebrow">{{ a.propose.kicker }}</div>
+        <h2 class="h-section event-propose__title">{{ a.propose.title }}</h2>
+        <p class="para event-propose__text">{{ a.propose.paragraph }}</p>
+      </div>
+      <a href="/{{ lang }}/contact/" class="btn btn-primary">{{ a.propose.cta }} {{ icon("arrow") }}</a>
+    </div>
+  </div>
+</section>

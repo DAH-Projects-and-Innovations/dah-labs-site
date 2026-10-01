@@ -87,6 +87,7 @@
   font-weight: 500;
   color: var(--muted);
   padding: 10px 2px;
+  white-space: nowrap;
   transition: color .15s ease;
 }
 .navlink:hover,
@@ -104,6 +105,8 @@
 }
 .navlink:hover::after,
 .navlink[aria-current="page"]::after { transform: scaleX(1); }
+/* Lien affiché seulement dans le menu ☰ (tablette et mobile), pas sur ordinateur */
+.navlink--mobile { display: none; }
 
 .header-tools { display: flex; align-items: center; gap: 10px; }
 
@@ -217,6 +220,7 @@
   }
   .menu-open .nav { display: flex; }
   .navlink { padding: 14px 0; font-size: 16px; border-bottom: 1px solid var(--border); }
+  .navlink--mobile { display: block; }
   .navlink::after { display: none; }
   .header-tools .header-cta { display: none; }
 

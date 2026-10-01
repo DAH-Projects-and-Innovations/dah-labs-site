@@ -1,0 +1,58 @@
+/* =====================================================================
+   pages/activities.css — styles propres à la page « Activités »
+   ===================================================================== */
+
+.event-heading { margin-bottom: 20px; }
+
+/* Activité à venir : une grande carte par ligne (date · infos · bouton) */
+.event-list { display: flex; flex-direction: column; gap: 20px; }
+.event-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  padding: 28px 30px;
+}
+.event-body { display: flex; flex-direction: column; gap: 10px; }
+.event-labels { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.event-meta { font-size: 14px; line-height: 1.6; color: var(--muted); }
+.event-meta strong { color: var(--text); font-weight: 600; }
+.event-cta { align-self: center; }
+
+/* Pavé « date » façon calendrier */
+.event-date {
+  width: 84px;
+  padding: 12px 0 14px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  color: var(--white);
+  background: var(--gradient-btn);
+  box-shadow: 0 10px 24px rgba(19, 112, 234, 0.3);
+  flex-shrink: 0;
+}
+.event-date__day { display: block; font-size: 32px; font-weight: 800; line-height: 1.05; }
+.event-date__month { display: block; margin-top: 2px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.event-date--sm { width: 62px; padding: 8px 0 10px; background: var(--surface-2); color: var(--text); box-shadow: none; }
+.event-date--sm .event-date__day { font-size: 24px; }
+.event-date--sm .event-date__month { font-size: 11px; }
+
+/* Activité passée : carte compacte dans une grille */
+.event-card { padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+.event-card__top { display: flex; align-items: center; gap: 14px; }
+.event-card .card-text { flex-grow: 1; }
+.event-card__foot { padding-top: 16px; border-top: 1px solid var(--border); }
+
+/* Aucune activité à venir : liens pour suivre le lab */
+.event-social { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+
+/* Encadré « Envie d'animer un webinaire ? » */
+.event-propose { padding: 40px 44px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.event-propose__title { font-size: 30px; }
+.event-propose__text { margin-top: 12px; max-width: 620px; }
+
+@media (max-width: 760px) {
+  .event-row { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 24px 22px; }
+  .event-cta { justify-self: start; }
+  .event-propose { flex-direction: column; align-items: flex-start; padding: 28px 22px; }
+  .event-propose__title { font-size: 26px; }
+}

@@ -77,6 +77,11 @@ export default function (eleventyConfig) {
     api.getFilteredByGlob("src/content/members/*.md").filter(isVisible).sort(byOrderThenDate)
   );
 
+  // Toutes les activités (webinaires, ateliers…), de la plus proche à la plus lointaine
+  eleventyConfig.addCollection("activities", (api) =>
+    api.getFilteredByGlob("src/content/activities/*.md").filter(isVisible).sort((a, b) => a.date - b.date)
+  );
+
   // Tous les articles, du plus récent au plus ancien
   eleventyConfig.addCollection("articles", (api) =>
     api.getFilteredByGlob("src/content/articles/*.md").filter(isVisible).sort((a, b) => b.date - a.date)
@@ -136,7 +141,10 @@ export default function (eleventyConfig) {
     const formats = {
       short: { day: "numeric", month: "short", timeZone: "UTC" },                 // 12 sept.
       month: { month: "long", year: "numeric", timeZone: "UTC" },                 // septembre 2026
-      long: { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }   // 12 septembre 2026
+      long: { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" },  // 12 septembre 2026
+      full: { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }, // samedi 12 septembre 2026
+      day: { day: "numeric", timeZone: "UTC" },                                   // 12 (pavé « calendrier »)
+      monthShort: { month: "short", timeZone: "UTC" }                             // sept.
     };
     const options = formats[style] || formats.long;
     return new Intl.DateTimeFormat(lang === "fr" ? "fr-FR" : "en-GB", options).format(d);
@@ -174,6 +182,14 @@ export default function (eleventyConfig) {
     const featured = (list || []).find((p) => p.article.data.featured);
     return featured || (list || [])[0] || null;
   });
+
+  // Activités à venir (celles du jour comprises) ou déjà passées, d'après la date
+  // du jour où le site est construit. Le site est reconstruit chaque nuit
+  // (voir .github/workflows/deploy.yml) : une activité passe donc toute seule
+  // dans « Déjà passées » le lendemain de sa date.
+  const startOfToday = () => { const d = new Date(); d.setUTCHours(0, 0, 0, 0); return d; };
+  eleventyConfig.addFilter("upcoming", (list) => (list || []).filter((x) => x.date >= startOfToday()));
+  eleventyConfig.addFilter("past", (list) => (list || []).filter((x) => x.date < startOfToday()).reverse());
 
   // Enlève un élément d'une liste (ex. l'article à la une de la grille)
   eleventyConfig.addFilter("without", (list, item) => (list || []).filter((x) => x !== item));

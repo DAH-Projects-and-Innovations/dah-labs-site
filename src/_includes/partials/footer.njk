@@ -17,6 +17,7 @@
         <div class="footer-social">
           <a href="{{ settings.social.linkedin }}" class="social-btn" target="_blank" rel="noopener">{{ icon("linkedin") }}LinkedIn</a>
           <a href="{{ settings.social.whatsapp }}" class="social-btn" target="_blank" rel="noopener">{{ icon("whatsapp") }}WhatsApp</a>
+          <a href="{{ settings.social.x or '#' }}" class="social-btn" target="_blank" rel="noopener">{{ icon("x") }}X (Twitter)</a>
           <a href="{{ settings.social.github }}" class="social-btn" target="_blank" rel="noopener">{{ icon("github") }}GitHub</a>
         </div>
       </div>
@@ -26,6 +27,7 @@
         <ul class="footer-links">
           <li><a href="/{{ lang }}/about/">{{ t.nav.about }}</a></li>
           <li><a href="/{{ lang }}/projects/">{{ t.nav.projects }}</a></li>
+          <li><a href="/{{ lang }}/activities/">{{ t.nav.activities }}</a></li>
           <li><a href="/{{ lang }}/community/">{{ t.nav.community }}</a></li>
           <li><a href="/{{ lang }}/blog/">{{ t.nav.blog }}</a></li>
           <li><a href="/{{ lang }}/contact/">{{ t.nav.contact }}</a></li>
