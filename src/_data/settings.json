@@ -5,7 +5,6 @@
   "social": {
     "linkedin": "https://www.linkedin.com/company/dah-lab/",
     "whatsapp": "https://chat.whatsapp.com/CDZwj60oMgN4mZCD3QhmXP",
-    "x": "",
     "github": "https://github.com/DAH-Projects-and-Innovations"
   },
   "ecosystem": {
@@ -15,9 +14,9 @@
     "media": "#"
   },
   "forms": {
-    "contact": "",
-    "propose": "",
-    "newsletter": ""
+    "contact": "https://script.google.com/macros/s/AKfycbwvYMo59v8XPr-PfEoUJH2Eh3eROV2luMeFp0MySoIYUmDucwlTOQyS7ArXODIiHRSX/exec",
+    "propose": "https://script.google.com/macros/s/AKfycbwvYMo59v8XPr-PfEoUJH2Eh3eROV2luMeFp0MySoIYUmDucwlTOQyS7ArXODIiHRSX/exec",
+    "newsletter": "https://script.google.com/macros/s/AKfycbwvYMo59v8XPr-PfEoUJH2Eh3eROV2luMeFp0MySoIYUmDucwlTOQyS7ArXODIiHRSX/exec"
   },
   "stats": {
     "members": "12",
