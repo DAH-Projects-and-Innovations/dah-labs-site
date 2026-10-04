@@ -87,7 +87,8 @@
     "text": "Un email à chaque nouvelle publication, rien de plus.",
     "label": "Votre email",
     "placeholder": "vous@exemple.com",
-    "cta": "S'abonner"
+    "cta": "S'abonner",
+    "rss": "Vous préférez un lecteur de flux ? Suivez le flux RSS"
   },
   "home": {
     "hero": {

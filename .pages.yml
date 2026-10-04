@@ -372,7 +372,7 @@ content:
       - name: forms
         label: Adresses d'envoi des formulaires
         type: object
-        description: Adresses fournies par le service de formulaires (ex. https://formspree.io/f/xxxxxx). Voir le guide.
+        description: Avec la Google Sheet, coller la même adresse https://script.google.com/macros/s/…/exec dans les 3 champs (voir apps-script/README.md). Avec Formspree, une adresse https://formspree.io/f/xxxxxx par formulaire.
         fields:
           - { name: contact, label: Formulaire de contact, type: string }
           - { name: propose, label: Formulaire « Proposer un projet », type: string }

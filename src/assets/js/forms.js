@@ -11,9 +11,16 @@
      • affiche « Envoi… », puis un message de succès ou d'erreur ;
      • si l'adresse d'envoi n'est pas encore remplie, l'indique poliment.
    Les messages sont dans la langue de la page (fichiers i18n).
+
+   Anti-robots : chaque formulaire contient un champ caché « _gotcha »
+   qu'un humain ne voit pas (un robot, lui, le remplit). Avec le script
+   Google (apps-script/Code.gs), on envoie aussi « _elapsed », le temps
+   passé sur la page : un envoi en moins de 3 secondes est ignoré.
    ===================================================================== */
 (function () {
   "use strict";
+
+  var pageLoadedAt = Date.now();
 
   // Les messages viennent des fichiers de traduction (i18n/en.json, i18n/fr.json) :
   // base.njk les écrit dans les attributs data-form-… de la balise <body>.
@@ -49,13 +56,24 @@
       button.disabled = true;
       show("", text.sending);
 
+      var data = new FormData(form);
+      if (endpoint.indexOf("script.google.com") !== -1) {
+        data.append("_elapsed", String(Date.now() - pageLoadedAt));
+      }
+
       fetch(endpoint, {
         method: "POST",
-        body: new FormData(form),
+        body: data,
         headers: { Accept: "application/json" }
       })
         .then(function (response) {
           if (!response.ok) throw new Error("HTTP " + response.status);
+          // Le script Google répond toujours « 200 » : on lit sa réponse
+          // { ok: true/false } pour savoir si le message a été accepté.
+          return response.json().catch(function () { return {}; });
+        })
+        .then(function (result) {
+          if (result.ok === false) throw new Error(result.error || "rejected");
           show("success", form.dataset.form === "newsletter" ? text.subscribed : text.success);
           form.reset();
         })

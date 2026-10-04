@@ -232,6 +232,16 @@ export default function (eleventyConfig) {
     [data.title, data.summary, (data.tags || []).join(" ")].join(" ").toLowerCase()
   );
 
+  // Flux RSS : les lecteurs de flux ne connaissent pas l'adresse du site, donc
+  // href="/media/x.svg" devient href="https://…/media/x.svg" dans le texte des articles.
+  eleventyConfig.addFilter("absoluteUrls", (html, base) => {
+    const root = String(base || "").replace(/\/$/, "");
+    return String(html || "").replace(/\s(href|src)="\/(?!\/)/g, ` $1="${root}/`);
+  });
+
+  // Date complète au format des flux RSS/Atom (2026-09-28T00:00:00.000Z)
+  eleventyConfig.addFilter("isoDateTime", (date) => (date ? new Date(date).toISOString() : ""));
+
   // Adresse du lien principal d'un projet : la démo, sinon GitHub, sinon rien
   eleventyConfig.addFilter("projectLink", (data) => {
     const ok = (u) => u && u !== "#";
