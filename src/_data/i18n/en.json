@@ -87,7 +87,8 @@
     "text": "One email per new post, nothing more.",
     "label": "Your email",
     "placeholder": "you@example.com",
-    "cta": "Subscribe"
+    "cta": "Subscribe",
+    "rss": "Prefer a feed reader? Follow the RSS feed"
   },
   "home": {
     "hero": {

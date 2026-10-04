@@ -1,0 +1,44 @@
+---
+# Flux RSS du blog (format Atom), un par langue : /en/feed.xml et /fr/feed.xml
+# On s'y abonne avec un lecteur de flux (Feedly, Inoreader…), et un outil
+# d'emailing peut s'en servir pour prévenir les abonnés de chaque nouvel article.
+# Comme sur la page Blog, un article non traduit apparaît dans les deux flux.
+# Il n'est utile que si « siteUrl » est rempli dans les réglages.
+pagination:
+  data: site.languages
+  size: 1
+  alias: lang
+permalink: "/{{ lang }}/feed.xml"
+eleventyExcludeFromCollections: true
+---
+{%- set t = i18n[lang] -%}
+{%- set absolute = settings.siteUrl | replace(r/\/$/, "") -%}
+{%- set articles = collections.articlePages | where("lang", lang) | limit(20) -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ lang }}">
+  <title>{{ t.meta.titles.blog }} · DAH Labs</title>
+  <subtitle>{{ t.blog.hero.lead }}</subtitle>
+  <link href="{{ absolute }}/{{ lang }}/feed.xml" rel="self"/>
+  <link href="{{ absolute }}/{{ lang }}/blog/"/>
+  <id>{{ absolute }}/{{ lang }}/blog/</id>
+  <icon>{{ absolute }}/favicon-32.png</icon>
+  {%- if articles.length %}
+  <updated>{{ articles[0].article.date | isoDateTime }}</updated>
+  {%- endif %}
+  {%- for entry in articles %}
+  {%- set a = entry.article.data %}
+  <entry xml:lang="{{ a.lang }}">
+    <title>{{ a.title }}</title>
+    <link href="{{ absolute }}{{ entry.url }}"/>
+    <id>{{ absolute }}{{ entry.url }}</id>
+    <published>{{ entry.article.date | isoDateTime }}</published>
+    <updated>{{ entry.article.date | isoDateTime }}</updated>
+    <author><name>{{ a.author or "DAH Labs" }}</name></author>
+    {%- if a.category %}
+    <category term="{{ a.category }}" label="{{ t.blog.cats[a.category] or a.category }}"/>
+    {%- endif %}
+    <summary>{{ a.summary }}</summary>
+    <content type="html">{{ entry.article.templateContent | absoluteUrls(absolute) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

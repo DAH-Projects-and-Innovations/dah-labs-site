@@ -61,6 +61,7 @@
           <input class="field" id="footer-email" name="email" type="email" required autocomplete="email" placeholder="{{ t.footer.nlPlaceholder }}">
           <input type="hidden" name="_form" value="newsletter">
           <input type="hidden" name="language" value="{{ lang }}">
+          <div class="honeypot" aria-hidden="true"><label>Leave empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
           <button type="submit" class="btn btn-primary" style="align-self: flex-start">{{ t.footer.nlCta }}</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>

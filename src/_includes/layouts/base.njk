@@ -44,6 +44,9 @@
   {%- endif %}
   <meta name="twitter:card" content="summary_large_image">
 
+  {# Flux RSS du blog (voir src/feed.njk) : les lecteurs de flux le trouvent tout seuls #}
+  <link rel="alternate" type="application/atom+xml" title="{{ t.meta.titles.blog }} · DAH Labs" href="/{{ lang }}/feed.xml">
+
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="theme-color" content="#031225">

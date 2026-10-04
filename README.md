@@ -63,6 +63,7 @@ dah-labs-site/
 ├── .pages.yml                 ← la configuration de l'ADMIN (les formulaires de Pages CMS)
 ├── .github/workflows/deploy.yml  ← la mise en ligne automatique sur GitHub Pages
 ├── netlify.toml               ← la configuration si on choisit Netlify à la place
+├── apps-script/               ← le script Google qui reçoit les formulaires (non publié avec le site)
 │
 └── src/                       ← TOUT ce qu'on écrit est ici
     │
@@ -95,6 +96,7 @@ dah-labs-site/
     ├── index.njk              → « / » : redirige vers /en/ (ou /fr/ si déjà choisi)
     ├── 404.njk                → la page « introuvable »
     ├── sitemap.njk            → le plan du site pour Google
+    ├── feed.njk               → les flux RSS du blog : /en/feed.xml et /fr/feed.xml
     │
     ├── content/               ── LE CONTENU (Markdown) — rempli par l'admin
     │   ├── articles/          ← un fichier par article (texte + titre, date, catégorie…)
@@ -171,13 +173,14 @@ npm run build   # construit la version finale dans _site/ (sans les brouillons)
 4. Inviter les rédacteurs : dans Pages CMS, **Collaborators** → leur adresse email. **Ils n'ont pas besoin de compte GitHub.**
 
 ### Étape 4 — Brancher les formulaires (contact, proposer un projet, newsletter)
-Un site sans serveur ne peut pas recevoir de messages lui-même : on passe par un service de formulaires.
-1. Créer un compte sur **[Formspree](https://formspree.io)** et créer 3 formulaires : « Contact », « Proposer un projet », « Newsletter ».
-2. Copier leurs adresses (du type `https://formspree.io/f/abcdwxyz`).
-3. Les coller dans l'admin : **Réglages du site → Adresses d'envoi des formulaires**.
+Un site sans serveur ne peut pas recevoir de messages lui-même : il envoie les formulaires à un service extérieur.
 
-Les messages arrivent alors par email. L'offre gratuite de Formspree compte 50 envois par mois : suffisant pour démarrer. Tant qu'une adresse est vide, le formulaire affiche poliment « pas encore branché ».
-Pour une vraie newsletter (envoi d'emails à tous les abonnés), on pourra plus tard remplacer l'adresse « Newsletter » par celle d'un outil comme Brevo ou Mailchimp.
+**Solution retenue : une Google Sheet.** Le script du dossier [`apps-script/`](apps-script/README.md) range chaque message dans un onglet (Contact, Projets proposés, Newsletter) et envoie un email d'alerte. C'est gratuit, sans limite pratique, et protégé contre les robots. Suivre **[apps-script/README.md](apps-script/README.md)** (environ 10 minutes), puis coller l'adresse obtenue dans les 3 champs de l'admin : **Réglages du site → Adresses d'envoi des formulaires**.
+
+**Autre possibilité : [Formspree](https://formspree.io).** Créer 3 formulaires et coller leurs 3 adresses (`https://formspree.io/f/…`) dans les mêmes champs. C'est plus rapide à installer, mais l'offre gratuite est limitée à 50 envois par mois.
+
+Tant qu'une adresse est vide, le formulaire affiche poliment « pas encore branché ».
+Les deux solutions **collectent** les inscriptions à la newsletter sans l'envoyer : pour l'envoi, importer la liste dans un outil d'emailing (Brevo, MailerLite…). Ces outils peuvent aussi suivre le **flux RSS** du blog (`/en/feed.xml` et `/fr/feed.xml`) pour annoncer chaque nouvel article.
 
 ### Étape 5 — Remplir les réglages
 Dans **Réglages du site** : adresse du site, email de contact, liens LinkedIn / WhatsApp / X / GitHub, liens DAH Academy et DAH Média, chiffres clés de la page À propos.
@@ -233,7 +236,7 @@ Le site contient des **contenus d'exemple**, à compléter ou remplacer depuis l
 - [ ] **Articles** : l'article RAG (EN + FR) est publié. 9 articles en brouillon contiennent un plan à rédiger (dont un « guide express » pour écrire sur le blog).
 - [ ] **Activités** : annoncer les premiers webinaires. Les 2 activités d'exemple en brouillon sont à supprimer.
 - [ ] **Réglages du site** : liens X, DAH Academy et DAH Média.
-- [ ] **Formulaires** : créer les 3 formulaires Formspree et coller leurs adresses.
+- [ ] **Formulaires** : installer le script Google Sheet ([apps-script/README.md](apps-script/README.md)) et coller son adresse dans les 3 champs de l'admin.
 - [ ] **Version mobile** : le site s'adapte déjà aux téléphones (menu ☰, colonnes empilées). Une passe de finition est prévue après validation de la version bureau.
 
 ---

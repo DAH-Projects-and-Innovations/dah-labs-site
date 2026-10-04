@@ -469,6 +469,8 @@ select.field {
 .newsletter__title { font-size: 18px; font-weight: 700; color: var(--text); }
 .newsletter__form { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
 .newsletter__fields { display: flex; gap: 10px; align-items: flex-end; }
+.newsletter__rss { font-size: 13px; color: var(--muted); }
+.newsletter__rss:hover { color: var(--link); }
 .newsletter__fields .field { width: 260px; }
 .newsletter--large { padding: 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
 .newsletter--large .newsletter__intro { align-items: flex-start; }
