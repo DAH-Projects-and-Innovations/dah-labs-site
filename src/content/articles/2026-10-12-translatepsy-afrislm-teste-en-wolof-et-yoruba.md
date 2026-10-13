@@ -1,16 +1,25 @@
 ---
-title: "TranslatePsy-AfriSLM testé en wolof et en yoruba : quand un petit modèle fait mieux qu'un grand"
+title: "TranslatePsy-AfriSLM testé en wolof et en yoruba : quand un petit modèle
+  fait mieux qu'un grand"
 lang: fr
 date: 2026-10-12
 category: africa
-summary: "Un modèle de traduction de 0,8 milliard de paramètres devance des systèmes 30 à 150 fois plus gros sur 19 langues africaines. Nous l'avons testé en wolof et en yoruba, avec des locuteurs natifs."
+summary: Un modèle de traduction de 0,8 milliard de paramètres devance des
+  systèmes 30 à 150 fois plus gros sur 19 langues africaines. Nous l'avons testé
+  en wolof et en yoruba, avec des locuteurs natifs.
 author: Pôle Vulgarisation & Veille
 icon: recherche
-tags: [LLM, Traduction automatique, Langues africaines, Wolof, Yoruba, Hugging Face]
+tags:
+  - LLM
+  - Traduction automatique
+  - Langues africaines
+  - Wolof
+  - Yoruba
+  - Hugging Face
 featured: false
 math: false
 translationKey: translatepsy-afrislm
-draft: true
+draft: false
 ---
 Les assistants d'intelligence artificielle maîtrisent l'anglais et le français, mais qu'en est-il des langues africaines comme le yoruba, le haoussa ou le wolof ? Une équipe de recherche a récemment montré qu'un modèle minuscule peut, sur ces langues peu dotées en données, faire mieux que des systèmes bien plus gros. Nous avons voulu le vérifier nous-mêmes.
 
@@ -46,22 +55,26 @@ Nous n'avons pas réussi à faire tourner le modèle sur nos ordinateurs : le te
 
 Sur 15 phrases, **14 ont été jugées bonnes** par nos relecteurs natifs, et une seule moyenne.
 
+
 | Direction | Phrases | Bonne | Moyenne |
-|---|---|---|---|
+| ---------------- | ------- | ----- | ------- |
 | Wolof → anglais | 5 | 4 | 1 |
 | Anglais → wolof | 3 | 3 | 0 |
 | Anglais → yoruba | 5 | 5 | 0 |
 | Yoruba → anglais | 2 | 2 | 0 |
 
+
 Quelques exemples représentatifs :
 
+
 | Phrase de départ | Direction | Traduction obtenue | Avis du relecteur |
-|---|---|---|---|
+| ------------------------------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | Senegal, dëkk bu am téranga la | Wolof → anglais | Senegal is a very teranga city. | Bonne |
 | I'm heading to work, I'll be back late | Anglais → wolof | Maa ngi dem liggéey, dinaa dellu lu yàgg. | Bonne |
 | Man ngi dem daara | Wolof → anglais | I'm going to bed. | Moyenne : « daara » (l'école coranique) est mal traduit |
 | Could you please tell me how I can get to the train station from here? | Anglais → yoruba | Jọ̀wọ́ sọ fún mi bí mo ṣe lè dé ibùdókọ̀ ojú irin láti ibí yìí? | Bonne |
 | Mo sábà máa ń tètè jí láàárọ̀, mo sì máa ń mu ife kọfí kí n tó bẹ̀rẹ̀ ọjọ́ mi. | Yoruba → anglais | I usually wake up early in the morning and have a cup of coffee before I start my day | Bonne, avec une petite nuance |
+
 
 La dernière ligne est un **aller-retour** : la phrase yoruba est la traduction produite par le modèle à partir de « I usually wake up early in the morning and start my day with a cup of coffee ». Le sens revient presque intact. Seule nuance : le café passe *avant* le début de la journée, alors que la phrase d'origine commence la journée *avec* un café.
 
@@ -98,3 +111,4 @@ Enfin, l'erreur sur « daara » est un bon rappel : un score de benchmark ne dit
 
 1. Gritta, M., Lambert, P., Back, J., & Nazir, A. (2026). *TranslatePsy-AfriSLM: High-Quality Data Scaling For Low-Resource Machine Translation*. Tether AI Research. [arXiv:2608.18655](https://arxiv.org/abs/2608.18655), licence CC BY 4.0.
 2. Modèles et données sur Hugging Face : [collection qvac/translatepsy-afrislm](https://huggingface.co/collections/qvac/translatepsy-afrislm)
+
