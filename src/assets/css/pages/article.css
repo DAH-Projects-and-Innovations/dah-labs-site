@@ -58,6 +58,8 @@
 .prose strong { color: var(--text); }
 .prose a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
 .prose img { border-radius: 14px; border: 1px solid var(--border); background: var(--surface); margin: 30px auto; }
+/* Figures liées depuis arXiv : fond transparent et texte noir, illisibles en thème sombre sans fond blanc */
+.prose img[src*="arxiv.org/"] { background: #FFFFFF; padding: 12px; }
 .prose hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
 .prose table { width: 100%; border-collapse: collapse; margin: 0 0 24px; font-size: 15px; }
 .prose th, .prose td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
