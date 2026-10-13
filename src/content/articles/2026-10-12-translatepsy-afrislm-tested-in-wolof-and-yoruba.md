@@ -1,16 +1,25 @@
 ---
-title: "TranslatePsy-AfriSLM tested in Wolof and Yoruba: when a small model beats a big one"
+title: "TranslatePsy-AfriSLM tested in Wolof and Yoruba: when a small model
+  beats a big one"
 lang: en
 date: 2026-10-12
 category: africa
-summary: "A 0.8-billion-parameter translation model outperforms systems 30 to 150 times larger across 19 African languages. We tested it in Wolof and Yoruba, with native speakers."
+summary: A 0.8-billion-parameter translation model outperforms systems 30 to 150
+  times larger across 19 African languages. We tested it in Wolof and Yoruba,
+  with native speakers.
 author: Outreach & Tech Watch team
 icon: recherche
-tags: [LLM, Machine translation, African languages, Wolof, Yoruba, Hugging Face]
+tags:
+  - LLM
+  - Machine translation
+  - African languages
+  - Wolof
+  - Yoruba
+  - Hugging Face
 featured: false
 math: false
 translationKey: translatepsy-afrislm
-draft: true
+draft: false
 ---
 AI assistants handle English and French well, but what about African languages such as Yoruba, Hausa or Wolof? A research team recently showed that a tiny model can outperform much larger systems on these low-resource languages. We wanted to check for ourselves.
 
@@ -46,22 +55,26 @@ We could not get the model running on our own computers: the test was run on Goo
 
 Out of 15 sentences, **14 were rated good** by our native reviewers, and only one average.
 
+
 | Direction | Sentences | Good | Average |
-|---|---|---|---|
+| ---------------- | --------- | ---- | ------- |
 | Wolof → English | 5 | 4 | 1 |
 | English → Wolof | 3 | 3 | 0 |
 | English → Yoruba | 5 | 5 | 0 |
 | Yoruba → English | 2 | 2 | 0 |
 
+
 A few representative examples:
 
+
 | Source sentence | Direction | Translation | Reviewer's verdict |
-|---|---|---|---|
+| ------------------------------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | Senegal, dëkk bu am téranga la | Wolof → English | Senegal is a very teranga city. | Good |
 | I'm heading to work, I'll be back late | English → Wolof | Maa ngi dem liggéey, dinaa dellu lu yàgg. | Good |
 | Man ngi dem daara | Wolof → English | I'm going to bed. | Average: "daara" (Quranic school) is mistranslated |
 | Could you please tell me how I can get to the train station from here? | English → Yoruba | Jọ̀wọ́ sọ fún mi bí mo ṣe lè dé ibùdókọ̀ ojú irin láti ibí yìí? | Good |
 | Mo sábà máa ń tètè jí láàárọ̀, mo sì máa ń mu ife kọfí kí n tó bẹ̀rẹ̀ ọjọ́ mi. | Yoruba → English | I usually wake up early in the morning and have a cup of coffee before I start my day | Good, with a slight nuance |
+
 
 The last row is a **round trip**: the Yoruba sentence is the model's own translation of "I usually wake up early in the morning and start my day with a cup of coffee". The meaning comes back almost intact. The only nuance: the coffee now comes *before* the day starts, whereas the original sentence starts the day *with* a coffee.
 
@@ -98,3 +111,4 @@ Finally, the "daara" error is a useful reminder that a benchmark score does not 
 
 1. Gritta, M., Lambert, P., Back, J., & Nazir, A. (2026). *TranslatePsy-AfriSLM: High-Quality Data Scaling For Low-Resource Machine Translation*. Tether AI Research. [arXiv:2608.18655](https://arxiv.org/abs/2608.18655), CC BY 4.0 licence.
 2. Models and data on Hugging Face: [qvac/translatepsy-afrislm collection](https://huggingface.co/collections/qvac/translatepsy-afrislm)
+
