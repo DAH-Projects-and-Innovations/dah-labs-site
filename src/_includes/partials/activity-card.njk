@@ -6,6 +6,9 @@
 {% from "partials/icons.njk" import icon %}
 {%- set e = activity.data -%}
 <article class="card card-hover spot event-card" data-reveal>
+  {%- if e.image %}
+  <img class="event-card__poster" src="{{ e.image }}" alt="" width="400" height="400" loading="lazy">
+  {%- endif %}
   <div class="event-card__top">
     <div class="event-date event-date--sm" aria-hidden="true">
       <span class="event-date__day">{{ activity.date | readableDate(lang, "day") }}</span>

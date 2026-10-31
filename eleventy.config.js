@@ -191,6 +191,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("upcoming", (list) => (list || []).filter((x) => x.date >= startOfToday()));
   eleventyConfig.addFilter("past", (list) => (list || []).filter((x) => x.date < startOfToday()).reverse());
 
+  // Horaire d'une activité. Écrit sans guillemets dans le fichier, « 15:00 » est lu
+  // comme un nombre (15 × 60 = 900) : on le remet sous la forme « 15:00 ».
+  eleventyConfig.addFilter("clock", (value) => {
+    if (typeof value !== "number") return value || "";
+    return `${Math.floor(value / 60)}:${String(Math.round(value % 60)).padStart(2, "0")}`;
+  });
+
   // Enlève un élément d'une liste (ex. l'article à la une de la grille)
   eleventyConfig.addFilter("without", (list, item) => (list || []).filter((x) => x !== item));
 

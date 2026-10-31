@@ -276,6 +276,12 @@ content:
         label: Lien du replay (après l'activité)
         type: string
         description: Lien de la vidéo (YouTube…). La carte de l'activité passée ouvre alors cette vidéo.
+      - name: image
+        label: Affiche (facultatif)
+        type: image
+        description: L'affiche ou le visuel de l'activité, carré de préférence. Un clic dessus l'ouvre en grand.
+        options:
+          path: src/media/activities
       - name: draft
         component: draft
         default: false
