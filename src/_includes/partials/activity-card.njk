@@ -32,6 +32,13 @@
     {%- if e.speakers and e.speakers.length %} · {{ t.activities.with }} {{ e.speakers | join(", ") }}{% endif %}
   </p>
   <p class="card-text">{{ e | tr("summary", lang) }}</p>
+  {%- if e.gallery and e.gallery.length %}
+  <ul class="event-gallery above">
+    {%- for img in e.gallery %}
+    <li><a href="{{ img }}" target="_blank" rel="noopener"><img src="{{ img }}" alt="{{ t.activities.gallery }} {{ loop.index }} : {{ e.title }}" width="56" height="56" loading="lazy"></a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
   {%- if e.replay | isLink %}
   <div class="event-card__foot"><span class="link-arrow">{{ icon("video", 16) }} {{ t.activities.replay }}</span></div>
   {%- endif %}

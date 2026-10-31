@@ -33,6 +33,13 @@
     <p class="event-meta">{{ t.activities.with }} {{ e.speakers | join(", ") }}</p>
     {%- endif %}
     <p class="card-text">{{ e | tr("summary", lang) }}</p>
+    {%- if e.gallery and e.gallery.length %}
+    <ul class="event-gallery above">
+      {%- for img in e.gallery %}
+      <li><a href="{{ img }}" target="_blank" rel="noopener"><img src="{{ img }}" alt="{{ t.activities.gallery }} {{ loop.index }} : {{ e.title }}" width="72" height="72" loading="lazy"></a></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
   </div>
   {%- if link %}
   <a class="btn btn-primary btn-sm event-cta above" href="{{ link }}" target="_blank" rel="noopener">{{ t.activities.register }} {{ icon("arrow") }}</a>

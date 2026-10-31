@@ -282,6 +282,14 @@ content:
         description: L'affiche ou le visuel de l'activité, carré de préférence. Un clic dessus l'ouvre en grand.
         options:
           path: src/media/activities
+      - name: gallery
+        label: Autres visuels (facultatif)
+        type: image
+        description: Les autres visuels de l'activité (intervenants, programme…), affichés en petites vignettes. Un clic les ouvre en grand.
+        options:
+          path: src/media/activities
+          multiple:
+            max: 12
       - name: draft
         component: draft
         default: false

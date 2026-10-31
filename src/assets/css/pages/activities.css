@@ -43,6 +43,13 @@
 .event-poster img { display: block; width: 160px; height: 160px; object-fit: cover; }
 .event-card__poster { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-sm); }
 
+/* Autres visuels : petites vignettes cliquables */
+.event-gallery { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 0; padding: 0; list-style: none; }
+.event-gallery a { display: block; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: transform .2s ease, border-color .2s ease; }
+.event-gallery a:hover { transform: translateY(-2px); border-color: var(--link); }
+.event-gallery img { display: block; width: 72px; height: 72px; object-fit: cover; }
+.event-card .event-gallery img { width: 56px; height: 56px; }
+
 /* Activité passée : carte compacte dans une grille */
 .event-card { padding: 26px; display: flex; flex-direction: column; gap: 14px; }
 .event-card__top { display: flex; align-items: center; gap: 14px; }
@@ -59,8 +66,8 @@
 
 @media (max-width: 760px) {
   .event-row, .event-row--poster { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 24px 22px; }
-  .event-poster { justify-self: start; }
-  .event-poster img { width: 100%; max-width: 320px; height: auto; aspect-ratio: 1; }
+  .event-poster { justify-self: start; width: 100%; max-width: 320px; }
+  .event-poster img { width: 100%; height: auto; aspect-ratio: 1; }
   .event-cta { justify-self: start; }
   .event-propose { flex-direction: column; align-items: flex-start; padding: 28px 22px; }
   .event-propose__title { font-size: 26px; }
